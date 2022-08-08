@@ -1,5 +1,5 @@
 import React from 'react';
-import img from '../assets/img/Без названия.jpg';
+import Img from '../assets/img/Без названия.jpg';
 
 
 function Header (){
@@ -7,7 +7,7 @@ function Header (){
       <div className ="header">
     <div className ="container">
       <div className ="header__logo">
-        <img width="145" src={img} alt="logo" />
+        <img width="145" src={Img} alt="logo" />
         <div>
           <h1>Книги для девочек подростков</h1>
           <p>Для классных девчонок</p>

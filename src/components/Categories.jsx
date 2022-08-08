@@ -1,4 +1,11 @@
+import React from 'react'
+
+
+
+
 function Categories (){
+  //чтобы при клике сработал класс active создаю useStste
+
     return(
       <div className="categories">
     <ul>
