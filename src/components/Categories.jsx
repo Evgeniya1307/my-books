@@ -5,6 +5,8 @@ import React from 'react'
 
 function Categories (){
   //чтобы при клике сработал класс active создаю useStste
+const[activeIndex, setActiveIndex]=React.useState(0); // буду сверять по индексу
+
 
     return(
       <div className="categories">
