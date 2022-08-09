@@ -7,19 +7,37 @@ function Categories (){
   //чтобы при клике сработал класс active создаю useStste
 const[activeIndex, setActiveIndex]=React.useState(0); // буду сверять по индексу
 
+//создаю массив для рендеринга списка
+const categories=[
+  'Все',
+  'Приключения',
+  'Про Любовь',
+  'Про Дружбу',
+  'Энциклопедия для Девочек',
+  'Мода',
+]
+
+
+//со-ла фу-ию анонимную её вызов при клике заставит вызвать другую функцию (небудет перересовок)
+const onClickCategory=(index)=>{
+  setActiveIndex(index) 
+}
 
     return(
       <div className="categories">
     <ul>
-      <li className="active">Все</li>
-      <li>Приключения</li>
-      <li>Про Любовь</li>
-      <li>Про Дружбу</li>
-      <li>Энциклопедия для девочек</li>
-      <li>Мода</li>
+    {/*берётся массив преоб-ся в новый массив с помощью маппа в новый массив внутри lш передала саму строчку ,её заменила на jsx   */}
+    {
+      categories.map((value,i)=>(
+        <li onClick={()=>onClickCategory(i)} className={activeIndex===i ? 'active' : ''}>{value}</li> 
+      ))
+    }
     </ul>
   </div>
   )
   }
 
   export default Categories;
+
+
+    //<li onClick={()=>onClickCategory(0)} className={activeIndex===0 ? 'active' : ''}>Все</li>
