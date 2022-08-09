@@ -1,30 +1,35 @@
 import React from "react";
 
-function BooksBlock({ title, price }) {
-  const [booksCount, setBookscCount] = React.useState(0);
+function BooksBlock({ title, price, imageUrl, types }) {
+  // const [booksCount, setBookscCount] = React.useState(0);
 
-  const onClickAdd = () => {
-    setBookscCount(booksCount + 1);
-  };
+  // const onClickAdd = () => {
+  //   setBookscCount(booksCount + 1);
+  // };
 
+ 
+//состояния для выбора какого типа
+
+ //массив для рендеринга 
+const typeNames=['Рэйтинг ⭐⭐⭐⭐⭐', 'Скачиваний (100)'];
   return (
     <div className="pizza-block">
       <img
         className="pizza-block__image"
-        src="https://img3.labirint.ru/rc/25fa4af5174c28eacd8e658760f66183/363x561q80/books79/783321/cover.jpg?1608614755"
-        alt="Pizza"
+        src={imageUrl}
+        alt="books"
       />
       <h4 className="pizza-block__title">{title}</h4>
       <div className="pizza-block__selector">
         <ul>
-          <li className="active">Рэйтинг ⭐⭐⭐⭐⭐</li>
-          <li>Скачиваний(100)</li>
+          {types.map((type)=>(
+            <li>{typeNames[type]}</li>
+          ))}
         </ul>
-      </div>
+      </div> 
       <div className="pizza-block__bottom">
-        <div className="pizza-block__price">395 ₽</div>
+        <div className="pizza-block__price">{price}€</div>
         <button
-          onClick={onClickAdd}
           className="button button--outline button--add"
         >
           <svg
@@ -40,7 +45,7 @@ function BooksBlock({ title, price }) {
             />
           </svg>
           <span>Добавить</span>
-          <i>{booksCount}</i>
+          <i>0</i>
         </button>
       </div>
     </div>

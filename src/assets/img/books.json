@@ -1,0 +1,92 @@
+[
+    {
+      "id": 0,
+      "imageUrl": "https://m.media-amazon.com/images/I/51sBcy9AH-L.jpg",
+      "title": "Маленькие Женщины",
+      "types": [0, 1],
+      "price": 803,
+      "category": 0,
+      "rating": 4
+    },
+    {
+      "id": 1,
+      "imageUrl": "https://proforientator.ru/upload/img/publications/stati/1lavrinivich.jpg",
+      "title": "Влюбить за 90 секунд",
+      "types": [0, 1],
+      "price": 245,
+      "category":2,
+      "rating": 6
+    },
+    {
+      "id": 2,
+      "imageUrl": "https://kronshtadtkniga.ru/images/img-osn/podrostki/16-18/asya-lavrinovich/xne-druzhi-so-mnoy-240.jpg.pagespeed.ic.AyV4tqjtJv.jpg",
+      "title": "Не Дружи Со Мной",
+      "types": [0, 1],
+      "price": 295,
+      "category": 3,
+      "rating": 4
+    },
+    {
+      "id": 3,
+      "imageUrl": "https://img4.labirint.ru/rc/3dcc5c10410af4030ecd7cc653b0257f/363x561q80/books58/572402/cover.jpg?1563975536",
+      "title": "Современная энциклопедия",
+      "types": [0, 1],
+      "price": 275,
+      "category": 4,
+      "rating": 2
+    },
+    {
+      "id": 4,
+      "imageUrl": "https://i.pinimg.com/736x/fc/35/c3/fc35c3ad77ee6be6f8ec1099c830e4a6.jpg",
+      "title": "Настольная книга о Моде и Красоте",
+      "types": [0, 1],
+      "price": 415,
+      "category": 5,
+      "rating": 8
+    },
+    {
+      "id": 5,
+      "imageUrl": "https://n1s1.hsmedia.ru/29/42/7e/29427e660dd9483032f62ea9a47056a0/580x913_0x0a330ca2_13214952141533289183.jpeg",
+      "title": "Принцесса под прекрытием",
+      "types": [0, 1],
+      "price": 580,
+      "category": 2,
+      "rating": 2
+    },
+    {
+      "id": 6,
+      "imageUrl": "http://www.mann-ivanov-ferber.ru/assets/images/covers/17/25817/1.00x-thumb.png",
+      "title": "Приключения Яи и Тудо",
+      "types": [0, 1],
+      "price": 675,
+      "category": 1,
+      "rating": 9
+    },
+    {
+      "id": 7,
+      "imageUrl": "https://img3.labirint.ru/rc/c06383d7046c15d6d4ce4ceaf1faa517/363x561q80/books71/704589/cover.jpg?1564210444",
+      "title": "Большая энциклопедия для девочек",
+      "types": [0, 1],
+      "price": 450,
+      "category": 4,
+      "rating": 10
+    },
+    {
+      "id": 8,
+      "imageUrl": "https://markakachestva.ru/uploads/posts/2020-02/1581842985_8-kak-privesti-dela-v-porjadok.jpg",
+      "title": "Как привести дела в порядок",
+      "types": [0, 1],
+      "price": 395,
+      "category": 5,
+      "rating": 10
+    },
+    {
+      "id": 9,
+      "imageUrl": "https://bukva.info/blog/wp-content/uploads/2021/10/knigi-dlya-detey-7-8-let-posledniy-kot-v-sapogah-oblozhka.jpeg",
+      "title": "Последний кот в сапогах",
+      "types": [0, 1],
+      "price": 285,
+      "category": 3,
+      "rating": 7
+    }
+  ]

@@ -3,8 +3,9 @@ import Header from './components/Header';
 import Categories from './components/Categories';
 import Sort from './components/Sort';
 import BooksBlock from './components/BooksBlock';
+import books from './assets/img/books.json';
 
-
+console.log(books);
 
 function App() {
   return (
@@ -18,7 +19,10 @@ function App() {
           </div>
           <h2 className="content__title">Все книги</h2>
           <div className="content__items">
-       <BooksBlock title = "Путешествия" price={500}/>
+          {
+          books.map(obj=> <BooksBlock title = {obj.title} price={obj.price} imageUrl={obj.imageUrl} types={obj.types}/>)
+  }
+          
       </div>
     </div>
     </div>
