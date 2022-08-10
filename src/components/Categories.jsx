@@ -29,7 +29,7 @@ const categories=[
     {/*берётся массив преоб-ся в новый массив с помощью маппа в новый массив внутри lш передала саму строчку ,её заменила на jsx   */}
     {
       categories.map((value,i)=>(
-        <li onClick={()=>setActiveIndex(i)} className={activeIndex===i ? 'active' : ''}>
+        <li key={i} onClick={()=>setActiveIndex(i)} className={activeIndex===i ? 'active' : ''}>
         {value} {/*значение*/}
         </li> 
       ))

@@ -24,7 +24,7 @@ const typeNames=['Рэйтинг ⭐⭐⭐⭐⭐', 'Скачиваний (100)']
       <div className="pizza-block__selector">
         <ul>
           {types.map((type)=>( //проверка если activeType равен type тому что вернёт массив то будет active или ''
-            <li onClick={()=> setActiveType(type)} className={activeType===type ? 'active' : ''}>{typeNames[type]}</li>
+            <li key={type} onClick={()=> setActiveType(type)} className={activeType===type ? 'active' : ''}>{typeNames[type]}</li>
           ))}{/*реакция при нажатии  на рэйтинг скачиваний */}
         </ul>
       </div> 
