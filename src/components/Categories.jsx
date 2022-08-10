@@ -19,9 +19,9 @@ const categories=[
 
 
 //со-ла фу-ию анонимную её вызов при клике заставит вызвать другую функцию (небудет перересовок)
-const onClickCategory=(index)=>{
-  setActiveIndex(index) 
-}
+// const onClickCategory=(index)=>{
+//   setActiveIndex(index) 
+// }
 
     return(
       <div className="categories">
@@ -29,7 +29,7 @@ const onClickCategory=(index)=>{
     {/*берётся массив преоб-ся в новый массив с помощью маппа в новый массив внутри lш передала саму строчку ,её заменила на jsx   */}
     {
       categories.map((value,i)=>(
-        <li onClick={()=>onClickCategory(i)} className={activeIndex===i ? 'active' : ''}>
+        <li onClick={()=>setActiveIndex(i)} className={activeIndex===i ? 'active' : ''}>
         {value} {/*значение*/}
         </li> 
       ))

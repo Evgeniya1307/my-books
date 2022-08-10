@@ -20,7 +20,7 @@ function App() {
           <h2 className="content__title">Все книги</h2>
           <div className="content__items">
           {
-          books.map(obj=> <BooksBlock title = {obj.title} price={obj.price} imageUrl={obj.imageUrl} types={obj.types}/>)
+          books.map(obj=> <BooksBlock {...obj} />)//спред сократил скопировал весь obj
   }
           
       </div>
