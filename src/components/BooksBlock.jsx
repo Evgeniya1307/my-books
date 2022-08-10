@@ -9,6 +9,7 @@ function BooksBlock({ title, price, imageUrl, types }) {
 
  
 //состояния для выбора какого типа
+const [activeType, setActiveType]= React.useState(0)
 
  //массив для рендеринга 
 const typeNames=['Рэйтинг ⭐⭐⭐⭐⭐', 'Скачиваний (100)'];
@@ -22,9 +23,9 @@ const typeNames=['Рэйтинг ⭐⭐⭐⭐⭐', 'Скачиваний (100)']
       <h4 className="pizza-block__title">{title}</h4>
       <div className="pizza-block__selector">
         <ul>
-          {types.map((type)=>(
-            <li>{typeNames[type]}</li>
-          ))}
+          {types.map((type)=>( //проверка если activeType равен type тому что вернёт массив то будет active или ''
+            <li onClick={()=> setActiveType(type)} className={activeType===type ? 'active' : ''}>{typeNames[type]}</li>
+          ))}{/*реакция при нажатии  на рэйтинг скачиваний */}
         </ul>
       </div> 
       <div className="pizza-block__bottom">
