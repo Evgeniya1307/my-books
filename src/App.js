@@ -5,7 +5,6 @@ import Sort from "./components/Sort";
 import BooksBlock from "./components/BooksBlock";
 import books from "./assets/img/books.json";
 
-console.log(books);
 
 function App() {
   return (

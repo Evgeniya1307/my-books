@@ -1,6 +1,23 @@
+import { type } from '@testing-library/user-event/dist/type';
+import React from 'react'
 
 
  function Sort(){
+  //оживляю при клике открывался список
+const [open, setOpen]= React.useState(false);// блок скрыт это будет как со светом включен выключен
+//стейт за выбранную сортировку
+const [selected, setSelected]=React.useState(0)
+
+//массив для списка
+const list =['популярности', 'цене', 'алфавиту']
+
+
+const onClickListItem=(i)=>{
+  selected(i)// выбери в сортировки пункт 
+  setOpen(false)// далее скройся
+}
+
+
     return( 
       <div className="sort">
     <div className="sort__label">
@@ -17,15 +34,23 @@
         />
       </svg>
       <b>Сортировка по:</b>
-      <span>популярности</span> 
+      <span onClick={()=>setOpen(!open)}>популярности</span> {/*когда кликаю сюда скрывается или пок-ся блок */}
     </div>
+    {/*чтобы этот блок отобразился если open try */}
+    {open && (
     <div className="sort__popup">
       <ul>
-        <li className="active">популярности</li>
-        <li>цене</li>
-        <li>алфавиту</li>
+       {list.map((name,i)=> (
+        <li
+         key={i}
+        onClick={()=> onClickListItem(i)}
+        className={selected === i ? 'active' : ''}>
+        {name}
+        </li>
+       ))}
       </ul>
     </div>
+    )}
   </div>
   )
    }
