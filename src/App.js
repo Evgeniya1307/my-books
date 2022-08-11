@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Categories from "./components/Categories";
 import Sort from "./components/Sort";
 import BooksBlock from "./components/BooksBlock";
-
+import Skeleton from "./components/Skeleton";
 
 
 
@@ -36,10 +36,8 @@ function App() {
           <h2 className="content__title">Все книги</h2>
           <div className="content__items">
             {
-              items.map((obj) => (
-                <BooksBlock key={obj.id} {...obj} />
-              )) //спред сократил скопировал весь obj если пропсы с точно таким названием
-            }
+              isLoading ? [...new Array(6)].map(()=> <Skeleton/> ) : items.map((obj) =><BooksBlock key ={obj.id} {...obj} />)}{/*если идёт загрузка создай массив из (6) и замени их .map на скелетон иначе если загрузка не идёт то рендери <BooksBlock key ={obj.id} {...obj} /  */}
+ {/*если тру покажи скелетон спред сократил скопировал весь obj если пропсы с точно таким названием */}
           </div>
         </div>
       </div>
