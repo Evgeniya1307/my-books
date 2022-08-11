@@ -10,13 +10,13 @@ const [selected, setSelected]=React.useState(0)
 
 //массив для списка
 const list =['популярности', 'цене', 'алфавиту']
-
+const sortName =list[selected]// что при нажатии на название оно и показывалось
 
 const onClickListItem=(i)=>{
   selected(i)// выбери в сортировки пункт 
   setOpen(false)// далее скройся
-}
-
+};
+ 
 
     return( 
       <div className="sort">
@@ -34,7 +34,7 @@ const onClickListItem=(i)=>{
         />
       </svg>
       <b>Сортировка по:</b>
-      <span onClick={()=>setOpen(!open)}>популярности</span> {/*когда кликаю сюда скрывается или пок-ся блок */}
+      <span onClick={()=>setOpen(!open)}>{sortName}</span> {/*когда кликаю сюда скрывается или пок-ся блок */}
     </div>
     {/*чтобы этот блок отобразился если open try */}
     {open && (
