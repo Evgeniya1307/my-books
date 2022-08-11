@@ -36,7 +36,7 @@ function App() {
           <h2 className="content__title">Все книги</h2>
           <div className="content__items">
             {
-              isLoading ? [...new Array(6)].map(()=> <Skeleton/> ) : items.map((obj) =><BooksBlock key ={obj.id} {...obj} />)}{/*если идёт загрузка создай массив из (6) и замени их .map на скелетон иначе если загрузка не идёт то рендери <BooksBlock key ={obj.id} {...obj} /  */}
+              isLoading ? [...new Array(6)].map(()=> <Skeleton/> ) : items.map((obj) =><BooksBlock key ={obj.id} {...obj} />)}{/*если идёт загрузка создай массив из (6) и замени их .map на скелетон иначе если загрузка не идёт то рендери items.map((obj) =><BooksBlock key ={obj.id} {...obj} возьми объект и его отрендери */}
  {/*если тру покажи скелетон спред сократил скопировал весь obj если пропсы с точно таким названием */}
           </div>
         </div>
