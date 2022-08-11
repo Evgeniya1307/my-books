@@ -7,19 +7,22 @@ import BooksBlock from "./components/BooksBlock";
 
 
 
+
+
 function App() {
   //состояния для пицц
   const [items, setItems]=React.useState([])// изначально пустой массив
-  
-  //пример запроса 
-  fetch('https://62f392d2a84d8c968126cc02.mockapi.io/items')
-  .then((res)=>{
-    return res.json()
-  })
-  .then((arr)=>{
-    setItems(arr)// делаю запросвозьми этот массив
-  });
+ 
+ //будет понятно что отобразить скелетон или пиццу
+  const[isLoading, setIsLoading] = React.useState()
 
+   React.useEffect(()=>{
+    fetch('https://62f392d2a84d8c968126cc02.mockapi.io/items')
+   .then((res)=> res.json())
+   .then((arr)=>{
+    setItems(arr)
+   })
+  }, []);
 
   return (
     <div className="wrapper">
