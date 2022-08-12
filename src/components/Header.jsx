@@ -6,6 +6,7 @@ function Header (){
     return( 
       <div className ="header">
     <div className ="container">
+    <a href = "/">
       <div className ="header__logo">
         <img width="145" src={Img} alt="logo" />
         <div>
@@ -16,11 +17,10 @@ function Header (){
           <li>❤Красота</li>
           <li>❤Спорт</li>
           <li>❤Хобби</li>
-          
           </ul>
-  
           </div>
       </div>
+      </a>
       <div className="header__cart">
         <a href="/cart.html" class="button button--cart">
           <span>520 ₽</span>
