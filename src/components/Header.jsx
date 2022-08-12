@@ -1,12 +1,12 @@
 import React from 'react';
 import Img from '../assets/img/Без названия.jpg';
-
+import {Link} from "react-router-dom"
 
 function Header (){
     return( 
       <div className ="header">
     <div className ="container">
-    <a href = "/">
+    <Link to ="/" > {/*при клике перейдёт на главную */}
       <div className ="header__logo">
         <img width="145" src={Img} alt="logo" />
         <div>
@@ -20,7 +20,7 @@ function Header (){
           </ul>
           </div>
       </div>
-      </a>
+      </Link>
       <div className="header__cart">
         <a href="/cart.html" class="button button--cart">
           <span>520 ₽</span>
