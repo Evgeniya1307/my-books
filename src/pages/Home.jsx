@@ -23,13 +23,14 @@ const Home = () => {
    .then((arr)=>{
     setItems(arr);
     setIsLoading(false);
-   })
+   });
+   window.scrollTo(0,0);
   }, []);
   
     return (
     <>
     <div className="content__top">
-            <Categories />
+            <Categories value={categoryId}/>{/*прокидываю пропс этого компонента вытащить данные */}
             <Sort />
           </div>
           <h2 className="content__title">Все книги</h2>
