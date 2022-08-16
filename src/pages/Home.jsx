@@ -11,7 +11,11 @@ const Home = () => {
   const [items, setItems]=React.useState([])// изначально пустой массив
  
  //будет понятно что отобразить скелетон или пиццу
-  const[isLoading, setIsLoading] = React.useState()
+  const[isLoading, setIsLoading] = React.useState(true);
+//стейт для категории и сортировки
+  const[categoryId, setCategoryId] = React.useState(0); //эти параметры передам на бэкенд
+  const [sortType, setSortType]=React.useState(0)
+
 
    React.useEffect(()=>{
     fetch('https://62f392d2a84d8c968126cc02.mockapi.io/items')

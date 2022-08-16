@@ -4,12 +4,8 @@ import { Routes, Route } from "react-router";
 import "./scss/app.scss";
 import Header from "./components/Header";
 import Home from "./pages/Home";
-import Cart from "./pages/Cart"
+import Cart from "./pages/Cart";
 import NotFound from "./pages/NotFound";
-
-
-
-
 
 function App() {
   return (
@@ -17,13 +13,12 @@ function App() {
       <Header />
       <div className="content">
         <div className="container">
-        <Routes> 
-        <Route path="/" element={<Home/>} /> {/*будет рендерить по пути гавному Home */}
-        <Route pattch = "/cart " element={<Cart />} />
-        <Route patch = "*" element = {<NotFound/>}/>
-        </Routes>
-    
-     
+          <Routes>
+            <Route path="/" element={<Home />} />{" "}
+            {/*будет рендерить по пути гавному Home */}
+            <Route patch="/cart" element={<Cart />} />
+            <Route patch="*" element={<NotFound />} />
+          </Routes>
         </div>
       </div>
     </div>

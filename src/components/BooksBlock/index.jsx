@@ -14,6 +14,7 @@ const [activeType, setActiveType]= React.useState(0)
  //массив для рендеринга 
 const typeNames=['Рэйтинг ⭐⭐⭐⭐⭐', 'Скачиваний (100)'];
   return (
+   <div className="pizza-block-wrapper">
     <div className="pizza-block">
       <img
         className="pizza-block__image"
@@ -49,6 +50,7 @@ const typeNames=['Рэйтинг ⭐⭐⭐⭐⭐', 'Скачиваний (100)']
           <i>0</i>
         </button>
       </div>
+    </div>
     </div>
   );
 }
