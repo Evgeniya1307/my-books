@@ -12,23 +12,23 @@ const Home = () => {
   //будет понятно что отобразить скелетон или пиццу
   const [isLoading, setIsLoading] = React.useState(true);
   //стейт для категории и сортировки
-  const [categoryId, setCategoryId] = React.useState(0); //эти параметры передам на бэкенд
+  const [categoryId, setCategoryId] = React.useState(0); //эти параметры передам на бэкенд хранят в себе категорию и фу-ию которая меняет эту категорию
   const [sortType, setSortType] = React.useState(0);
 
   React.useEffect(() => {
-    fetch("https://62f392d2a84d8c968126cc02.mockapi.io/items")
+    fetch("https://62f392d2a84d8c968126cc02.mockapi.io/items?category=" + categoryId)//сначала ? потом параметры если 1парметр то 1 амперсанд
       .then((res) => res.json())
       .then((arr) => {
         setItems(arr);
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, []);
+  }, [categoryId]);//если поменяется делай запрос на бэкенд
 
   return (
     <div className="container">
       <div className="content__top">
-        <Categories value={categoryId} onClickCategory={(i) => setCategoryId(i)} />{/*меняю стейт при нажатии  */}
+        <Categories value={categoryId} onClickCategory={(i) => setCategoryId(i)} />{/*значение передала в value и фу-ия будет менять стейт при нажатии  */}
         {/*прокидываю пропс этого компонента вытащить данные */}
         <Sort />
       </div>
