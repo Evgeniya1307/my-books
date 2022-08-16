@@ -3,9 +3,7 @@ import React from 'react'
 
 
 
-function Categories (){
-  //чтобы при клике сработал класс active создаю useStste
-const[activeIndex, setActiveIndex]=React.useState(0); // буду сверять по индексу
+function Categories ({value, onClickCategory}){
 //создаю массив для рендеринга списка он статичный не меняется
 const categories=[
   'Все',
@@ -24,11 +22,11 @@ const categories=[
     <ul>
     {/*берётся массив преоб-ся в новый массив с помощью маппа в новый массив внутри lш передала саму строчку ,её заменила на jsx   */}
     {
-      categories.map((value,i)=>(
+      categories.map((categoryName,i)=>(
         <li key={i} 
-        onClick={()=>setActiveIndex(i)}
-         className={activeIndex=== i ? 'active' : ''}>
-        {value} {/*значение*/}
+        onClick={()=>onClickCategory(i)}
+      className={value=== i ? 'active' : ''}> { /*activeIndex храню в value */}
+        {categoryName} {/*значение*/}
         </li> 
       ))
     }
@@ -41,6 +39,5 @@ const categories=[
 
 
     //<li onClick={()=>onClickCategory(0)} className={activeIndex===0 ? 'active' : ''}>Все</li>
-
-
-  
+ //чтобы при клике сработал класс active создаю useStste
+//const[activeIndex, setActiveIndex]=React.useState(0); // буду сверять по индексу

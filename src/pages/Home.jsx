@@ -28,7 +28,7 @@ const Home = () => {
   }, []);
   
     return (
-    <>
+<div className="container">
     <div className="content__top">
             <Categories value={categoryId}/>{/*прокидываю пропс этого компонента вытащить данные */}
             <Sort />
@@ -39,7 +39,7 @@ const Home = () => {
               isLoading ? [...new Array(6)].map(()=> <Skeleton/> ) : items.map((obj) =><BooksBlock key ={obj.id} {...obj} />)}{/*если идёт загрузка создай массив из (6) и замени их .map на скелетон иначе если загрузка не идёт то рендери items.map((obj) =><BooksBlock key ={obj.id} {...obj} возьми объект и его отрендери */}
  {/*если тру покажи скелетон спред сократил скопировал весь obj если пропсы с точно таким названием */}
           </div>
-    </>
+   </div>
   );
 };
 
