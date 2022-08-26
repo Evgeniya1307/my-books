@@ -16,20 +16,20 @@ const Home = () => {
   const [sortType, setSortType] = React.useState(0);
 
   React.useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true)//перед загрузкой
     fetch("https://62f392d2a84d8c968126cc02.mockapi.io/items?category=" + categoryId)//сначала ? потом параметры если 1парметр то 1 амперсанд
       .then((res) => res.json())
       .then((arr) => {
         setItems(arr);
         setIsLoading(false);
-      });
+      }); 
     window.scrollTo(0, 0);
   }, [categoryId]);//если поменяется делай запрос на бэкенд
  
   return (
     <div className="container">
       <div className="content__top">
-        <Categories value={categoryId} onClickCategory={(i) => setCategoryId(i)} />{/*значение передала в value и фу-ия будет менять стейт при нажатии  */}
+        <Categories value={categoryId} onChangeCategory={(i) => setCategoryId(i)} />{/*значение передала в value и фу-ия будет менять стейт при нажатии  */}
         {/*прокидываю пропс этого компонента вытащить данные */}
         <Sort value ={sortType} onChangeSort={(i)=>setSortType(i)}/>{/*сортировка по по полуряности */}
       </div>

@@ -3,7 +3,7 @@ import React from 'react'
 
 
 
-function Categories ({value, onClickCategory}){
+function Categories ({value, onChangeCategory}){
 //создаю массив для рендеринга списка он статичный не меняется
 const categories=[
   'Все',
@@ -21,11 +21,11 @@ const categories=[
       <div className="categories">
     <ul>
     {/*берётся массив преоб-ся в новый массив с помощью маппа в новый массив внутри lш передала саму строчку ,её заменила на jsx   */}
-    {
-      categories.map((categoryName,i)=>(
-        <li key={i} 
-        onClick={()=>onClickCategory(i)}
-      className={value=== i ? 'active' : ''}> { /*activeIndex храню в value */}
+    {categories.map((categoryName, i) => (
+        <li 
+        key={i} 
+        onClick={() => onChangeCategory(i)}
+      className={value === i ? 'active' : ''}> { /*activeIndex храню в value */}
         {categoryName} {/*значение*/}
         </li> 
       ))

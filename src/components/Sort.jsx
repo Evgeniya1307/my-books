@@ -1,19 +1,17 @@
-import { type } from '@testing-library/user-event/dist/type';
+
 import React from 'react'
 
 
- function Sort(){
+ function Sort({value, onChangeSort}){
   //оживляю при клике открывался список
 const [open, setOpen]= React.useState(false);// блок скрыт это будет как со светом включен выключен
-//стейт за выбранную сортировку
-const [selected, setSelected]=React.useState(0)
 
 //массив для списка
 const list =['популярности', 'цене', 'алфавиту']
-const sortName =list[selected]// что при нажатии на название оно и показывалось
+const sortName =list[value]// что при нажатии на название оно и показывалось
 
 const onClickListItem=(i)=>{
-  selected(i)// выбери в сортировки пункт 
+ onChangeSort(i)// выбери в сортировки пункт 
   setOpen(false)// далее скройся
 };
  
@@ -44,7 +42,7 @@ const onClickListItem=(i)=>{
         <li
          key={i}
         onClick={()=> onClickListItem(i)}
-        className={selected === i ? 'active' : ''}>
+        className={value === i ? 'active' : ''}>
         {name}
         </li>
        ))}
