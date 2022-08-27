@@ -21,7 +21,7 @@ const Home = () => {
       .then((res) => res.json())
       .then((arr) => {
         setItems(arr);
-        setIsLoading(false);
+        setIsLoading(false);//после загрузки скрываю
       }); 
     window.scrollTo(0, 0);
   }, [categoryId]);//если поменяется делай запрос на бэкенд

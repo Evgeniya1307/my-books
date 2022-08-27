@@ -5,7 +5,6 @@ import React from 'react'
  function Sort({value, onChangeSort}){
   //оживляю при клике открывался список
 const [open, setOpen]= React.useState(false);// блок скрыт это будет как со светом включен выключен
-
 //массив для списка
 const list =['популярности', 'цене', 'алфавиту']
 const sortName =list[value]// что при нажатии на название оно и показывалось
