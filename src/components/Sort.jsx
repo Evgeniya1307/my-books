@@ -7,11 +7,11 @@ import React from 'react'
 const [open, setOpen]= React.useState(false);// блок скрыт это будет как со светом включен выключен
 //массив для списка
 const list =[
-{name:'популярности', sort:'rating'},
-{name:'цене', sort:'price'},
-{name:'алфавиту', sort:'title'},
-]
-const sortName =list[value].name// получила объект и свойства что при нажатии на название оно и показывалось
+{name:'популярности', sortProperty:'rating'},
+{name:'цене', sortProperty:'price'},
+{name:'алфавиту', sortProperty:'title'},
+];
+
 
 const onClickListItem=(i)=>{
  onChangeSort(i)// выбери в сортировки пункт 
@@ -35,7 +35,7 @@ const onClickListItem=(i)=>{
         />
       </svg>
       <b>Сортировка по:</b>
-      <span onClick={()=>setOpen(!open)}>{sortName}</span> {/*когда кликаю сюда скрывается или пок-ся блок */}
+      <span onClick={()=>setOpen(!open)}>{value.name}</span> {/*когда кликаю сюда скрывается или пок-ся блок */}
     </div>
     {/*чтобы этот блок отобразился если open try */}
     {open && (
@@ -44,9 +44,9 @@ const onClickListItem=(i)=>{
        {list.map((obj,i)=> (
         <li
          key={i}
-        onClick={()=> onClickListItem(i)}
+        onClick={()=> onClickListItem(obj)}//передаю целый объект
         className={value === i ? 'active' : ''}>
-        {obj.name}
+        {obj.name}{/*рендерю obj.name*/}
         </li>
        ))}
       </ul>

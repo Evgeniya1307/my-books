@@ -12,7 +12,10 @@ const Home = () => {
   const [isLoading, setIsLoading] = React.useState(true);// при первом рендере true
   //стейт для категории и сортировки
   const [categoryId, setCategoryId] = React.useState(0); //эти параметры передам на бэкенд хранят в себе категорию и фу-ию которая меняет эту категорию
-  const [sortType, setSortType] = React.useState(0);
+  const [sortType, setSortType] = React.useState({ //sorType хр-ся объект в нём св-ва name,sortProperty он пере-ся в компонент выт-ся из велью 
+    name:'популярности',
+    sortProperty:'rating'
+  });
 
   React.useEffect(() => {
     setIsLoading(true)//перед загрузкой
@@ -23,7 +26,7 @@ const Home = () => {
         setIsLoading(false);//после загрузки скрываю
       }); 
     window.scrollTo(0, 0);
-  }, [categoryId]);//если поменяется делай запрос на бэкенд
+  }, [categoryId, sortType]);//если поменяется делай запрос на бэкенд
  
   return (
     <div className="container">
