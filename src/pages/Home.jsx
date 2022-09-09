@@ -19,7 +19,12 @@ const Home = () => {
 
   React.useEffect(() => {
     setIsLoading(true)//перед загрузкой
-    fetch("https://62f392d2a84d8c968126cc02.mockapi.io/items?category=" + categoryId)//сначала ? потом параметры если 1парметр то 1 амперсанд
+    fetch(
+      `https://62f392d2a84d8c968126cc02.mockapi.io/items?${
+      categoryId > 0 ? `category = ${categoryId}`: ''
+  }&sortBy=${sortType.sortProperty}&order=desc` //проверка по убыванию
+
+    )
       .then((res) => res.json())
       .then((arr) => {
         setItems(arr);
