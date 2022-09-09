@@ -2,7 +2,7 @@
 import React from 'react'
 
 
- function Sort({value, onChangeSort}){
+ function Sort({value, onChangeSort}){ //value хранит в себе объект и я его рендерю  
   //оживляю при клике открывался список
 const [open, setOpen]= React.useState(false);// блок скрыт это будет как со светом включен выключен
 //массив для списка
@@ -35,7 +35,7 @@ const onClickListItem=(i)=>{
         />
       </svg>
       <b>Сортировка по:</b>
-      <span onClick={()=>setOpen(!open)}>{value.name}</span> {/*когда кликаю сюда скрывается или пок-ся блок */}
+      <span onClick={()=>setOpen(!open)}>{value.name}</span> {/* рендарю вэлью когда кликаю сюда скрывается или пок-ся блок */}
     </div>
     {/*чтобы этот блок отобразился если open try */}
     {open && (
@@ -45,7 +45,7 @@ const onClickListItem=(i)=>{
         <li
          key={i}
         onClick={()=> onClickListItem(obj)}//передаю целый объект
-        className={value === i ? 'active' : ''}>
+        className={value.sortProperty === obj.sortProperty ? 'active' : ''}> {/*проверка что выбрала по популярности т,е то что у родителя хранится value c тем что рендерю */}
         {obj.name}{/*рендерю obj.name*/}
         </li>
        ))}
