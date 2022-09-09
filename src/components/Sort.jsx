@@ -6,8 +6,12 @@ import React from 'react'
   //оживляю при клике открывался список
 const [open, setOpen]= React.useState(false);// блок скрыт это будет как со светом включен выключен
 //массив для списка
-const list =['популярности', 'цене', 'алфавиту']
-const sortName =list[value]// что при нажатии на название оно и показывалось
+const list =[
+{name:'популярности', sort:'rating'},
+{name:'цене', sort:'price'},
+{name:'алфавиту', sort:'title'},
+]
+const sortName =list[value].name// получила объект и свойства что при нажатии на название оно и показывалось
 
 const onClickListItem=(i)=>{
  onChangeSort(i)// выбери в сортировки пункт 
@@ -37,12 +41,12 @@ const onClickListItem=(i)=>{
     {open && (
     <div className="sort__popup">
       <ul>
-       {list.map((name,i)=> (
+       {list.map((obj,i)=> (
         <li
          key={i}
         onClick={()=> onClickListItem(i)}
         className={value === i ? 'active' : ''}>
-        {name}
+        {obj.name}
         </li>
        ))}
       </ul>

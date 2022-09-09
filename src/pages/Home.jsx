@@ -8,9 +8,8 @@ import Skeleton from "../components/BooksBlock/Skeleton";
 const Home = () => {
   //состояния для пицц
   const [items, setItems] = React.useState([]); // изначально пустой массив
-
   //будет понятно что отобразить скелетон при загрузке или пиццу
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(true);// при первом рендере true
   //стейт для категории и сортировки
   const [categoryId, setCategoryId] = React.useState(0); //эти параметры передам на бэкенд хранят в себе категорию и фу-ию которая меняет эту категорию
   const [sortType, setSortType] = React.useState(0);
