@@ -10,7 +10,7 @@ const Home = () => {
   const [items, setItems] = React.useState([]); // изначально пустой массив
   //будет понятно что отобразить скелетон при загрузке или пиццу
   const [isLoading, setIsLoading] = React.useState(true);// при первом рендере true
-  //стейт для категории и сортировки
+  //2 стейта для категории и сортировки
   const [categoryId, setCategoryId] = React.useState(0); //эти параметры передам на бэкенд хранят в себе категорию и фу-ию которая меняет эту категорию
   const [sortType, setSortType] = React.useState({ //sorType хр-ся объект в нём св-ва name,sortProperty он пере-ся в компонент выт-ся из велью 
     name:'популярности',
