@@ -7,10 +7,12 @@ import React from 'react'
 const [open, setOpen]= React.useState(false);// блок скрыт это будет как со светом включен выключен
 //массив для списка
 const list =[
-{name:'популярности(DESC)', sortProperty:'rating'},
-{name:'популярности (ASC)', sortProperty:'rating'},
-{name:'цене', sortProperty:'price'},
-{name:'алфавиту', sortProperty:'title'},
+{name:'популярности(DESC)', sortProperty:'rating'},//убывание
+{name:'популярности (ASC)', sortProperty:'rating'},//возрастание
+{name:'цене(DESC)', sortProperty:'price'},
+{name:'цене(ASC)', sortProperty:'price'},
+{name:'алфавиту(DESC)', sortProperty:'title'},
+{name:'алфавиту(ASC)', sortProperty:'title'},
 ];
 
 
