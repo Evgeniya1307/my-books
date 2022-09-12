@@ -1,6 +1,6 @@
 .root {
-  position: relative;// чтобы иконка не выходила
-  left: -120px; // прижать к логотипу 
+  position: relative; // чтобы иконка не выходила
+  left: -120px; // прижать к логотипу
 }
 
 .input {
@@ -10,8 +10,8 @@
   width: 300px;
   border-radius: 10px;
   font-size: 16px;
-  transition: all 0.15s ease-in-out;// раширяется поиск при вводе
-  
+  transition: all 0.15s ease-in-out; // раширяется поиск при вводе
+
   &:focus {
     border: 1px solid rgba(0, 0, 0, 0.2);
   }
@@ -25,3 +25,19 @@
   left: 14px;
   top: 12px;
 }
+
+.clearIcon {
+  width: 18px;
+  height: 18px;
+  opacity: 0.3;
+  position: absolute; //внутри
+  right: 15px;
+  top: 15px;
+  cursor: pointer;
+
+//когда навожу на иконку крестик будет ярче и тусклеть
+&:hover {
+  opacity: 0.8;
+}
+}
+  
