@@ -22,7 +22,7 @@ function Header ({searchValue, setSearchValue}){ //получаю данные
           </div>
       </div>
       </Link>
-      <Search/>
+      <Search searchValue={searchValue} setSearchValue={setSearchValue}/>{/*передала данные */}
       <div className="header__cart">
         <Link to ="/cart" className ="button button--cart">
           <span>52 €</span>
