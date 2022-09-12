@@ -19,10 +19,13 @@ const Home = () => {
 
   React.useEffect(() => {
     setIsLoading(true)//перед загрузкой
+    
+    const order=sortType.sortProperty.includes('-') ? 'asc' : 'desc';//если includes есть - то делать asc иначе desc
+    
     fetch(
       `https://62f392d2a84d8c968126cc02.mockapi.io/items?${
       categoryId > 0 ? `category = ${categoryId}`: ''
-  }&sortBy=${sortType.sortProperty}&order=desc` //проверка по убыванию
+  }&sortBy=${sortType.sortProperty.replace('-','')}&order=${sortType.sortProperty.includes('-')`)}` //проверка по убыванию
 
     )
       .then((res) => res.json())

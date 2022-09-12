@@ -8,11 +8,11 @@ const [open, setOpen]= React.useState(false);// блок скрыт это бу�
 //массив для списка
 const list =[
 {name:'популярности(DESC)', sortProperty:'rating'},//убывание
-{name:'популярности (ASC)', sortProperty:'rating'},//возрастание
+{name:'популярности (ASC)', sortProperty:'-rating'},//возрастание
 {name:'цене(DESC)', sortProperty:'price'},
-{name:'цене(ASC)', sortProperty:'price'},
+{name:'цене(ASC)', sortProperty:'-price'},
 {name:'алфавиту(DESC)', sortProperty:'title'},
-{name:'алфавиту(ASC)', sortProperty:'title'},
+{name:'алфавиту(ASC)', sortProperty:'-title'},
 ];
 
 
