@@ -7,7 +7,11 @@ import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import NotFound from "./pages/NotFound";
 
+
 function App() {
+//стейт хранящий поле поска
+  const  [search, setSearchValue] =React.useState('')
+
   return (
     <div className="wrapper">
       <Header />
