@@ -7,7 +7,8 @@ import React from 'react'
 const [open, setOpen]= React.useState(false);// блок скрыт это будет как со светом включен выключен
 //массив для списка
 const list =[
-{name:'популярности', sortProperty:'rating'},
+{name:'популярности(DESC)', sortProperty:'rating'},
+{name:'популярности (ASC)', sortProperty:'rating'},
 {name:'цене', sortProperty:'price'},
 {name:'алфавиту', sortProperty:'title'},
 ];
