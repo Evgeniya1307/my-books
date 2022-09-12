@@ -18,7 +18,7 @@ const list =[
 
 const onClickListItem=(i)=>{
  onChangeSort(i)// выбери в сортировки пункт 
-  setOpen(false)// далее скройся
+  setOpen(false)// далее скройся там где сортировка 
 };
  
 
