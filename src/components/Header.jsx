@@ -3,7 +3,7 @@ import Img from '../assets/img/Без названия.jpg';
 import {Link} from "react-router-dom"
 import Search from './Search';
 
-function Header (){
+function Header ({searchValue, setSearchValue}){ //получаю данные
     return( 
       <div className ="header">
     <div className ="container">

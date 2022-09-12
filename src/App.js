@@ -10,11 +10,11 @@ import NotFound from "./pages/NotFound";
 
 function App() {
 //стейт хранящий поле поска
-  const  [search, setSearchValue] =React.useState('')
+  const  [searchValue, setSearchValue] =React.useState('')// инпут без ничего
 
   return (
     <div className="wrapper">
-      <Header />
+      <Header searchValue={searchValue} setSearchValue={setSearchValue} />{/*передаю данные */} 
       <div className="content">
         <div className="container">
           <Routes>
@@ -26,7 +26,7 @@ function App() {
         </div>
       </div>
     </div>
-  );
+  ); 
 }
 
 export default App;
