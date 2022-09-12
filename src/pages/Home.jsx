@@ -15,7 +15,7 @@ const Home = () => {
   const [sortType, setSortType] = React.useState({
     //sorType хр-ся объект в нём св-ва name,sortProperty он пере-ся в компонент выт-ся из велью
     name: 'популярности', //соз-ла объект при первом открытии приложения выберется популярные
-    sortProperty: 'rating',
+    sortProperty: 'rating', // по умолчанию сортировка по рейтингу
   });
 
   React.useEffect(() => {
@@ -30,11 +30,11 @@ const Home = () => {
     ) //проверка по убыванию
       .then((res) => res.json())
       .then((arr) => {
-        setItems(arr);
+        setItems(arr); //воз-ет новые пиццы
         setIsLoading(false); //после загрузки скрываю
       });
     window.scrollTo(0, 0);
-  }, [categoryId, sortType]); //если поменяется делай запрос на бэкенд
+  }, [categoryId, sortType]); //если поменяется категория или сортировка делай запрос на бэкенд на получение новых пицц
 
   return (
     <div className="container">
