@@ -18,7 +18,7 @@ function App() {
       <div className="content">
         <div className="container">
           <Routes>
-            <Route path="/" element={<Home />} />{" "}
+  <Route path="/" element={<Home searchValue={searchValue}/>} />{/*передаю значения */}
             {/*будет рендерить по пути гавному Home */}
             <Route patch="/cart" element={<Cart />} />
             <Route patch="*" element={<NotFound />} />
