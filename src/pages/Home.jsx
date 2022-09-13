@@ -5,7 +5,7 @@ import Sort from "../components/Sort";
 import BooksBlock from "../components/BooksBlock";
 import Skeleton from "../components/BooksBlock/Skeleton";
 
-const Home = () => {
+const Home = ({ searchValue}) => {//вытаскиваю данные
   //состояния для пицц
   const [items, setItems] = React.useState([]); // изначально пустой массив
   //будет понятно что отобразить скелетон при загрузке или пиццу
