@@ -1,0 +1,17 @@
+//стилизую постраничный вывод
+.root {
+  li {
+    display: inline-block;
+    text-align: center;
+    align-items: center;
+    width: 40px;
+    line-height: 38px;
+    height: 40px;
+    border: 1px solid rgb(237, 76, 76);
+    border-radius: 30px;
+    margin-right: 10px; //отступ справа
+    a {
+      display: inline-block;
+    }
+  }
+}

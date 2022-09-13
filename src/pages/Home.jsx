@@ -4,8 +4,10 @@ import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import BooksBlock from "../components/BooksBlock";
 import Skeleton from "../components/BooksBlock/Skeleton";
+import Pagination from "../Pagination";
 
-const Home = ({ searchValue}) => {//вытаскиваю данные
+const Home = ({ searchValue }) => {
+  //вытаскиваю данные
   //состояния для пицц
   const [items, setItems] = React.useState([]); // изначально пустой массив
   //будет понятно что отобразить скелетон при загрузке или пиццу
@@ -14,19 +16,19 @@ const Home = ({ searchValue}) => {//вытаскиваю данные
   const [categoryId, setCategoryId] = React.useState(0); //эти параметры передам на бэкенд хранят в себе категорию и фу-ию которая меняет эту категорию
   const [sortType, setSortType] = React.useState({
     //sorType хр-ся объект в нём св-ва name,sortProperty он пере-ся в компонент выт-ся из велью
-    name: 'популярности', //соз-ла объект при первом открытии приложения выберется популярные
-    sortProperty: 'rating', // по умолчанию сортировка по рейтингу
+    name: "популярности", //соз-ла объект при первом открытии приложения выберется популярные
+    sortProperty: "rating", // по умолчанию сортировка по рейтингу
   });
 
   React.useEffect(() => {
     setIsLoading(true); //перед загрузкой
 
-    const sortBy = sortType.sortProperty.replace("-", "");//из свойства удали - 
+    const sortBy = sortType.sortProperty.replace("-", ""); //из свойства удали -
     const order = sortType.sortProperty.includes("-") ? "asc" : "desc"; // проверяй если в сортировке - если includes есть - то делать asc возрастанию иначе desc по убыванию
     const category = categoryId > 0 ? `category = ${categoryId}` : "";
- 
+    const search = searchValue ? `&search=${searchValue}` : "";//для поиска по бэкенду 
     fetch(
-      `https://62f392d2a84d8c968126cc02.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}`
+      `https://62f392d2a84d8c968126cc02.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${search}`
     ) //проверка по убыванию
       .then((res) => res.json())
       .then((arr) => {
@@ -34,16 +36,20 @@ const Home = ({ searchValue}) => {//вытаскиваю данные
         setIsLoading(false); //после загрузки скрываю
       });
     window.scrollTo(0, 0);
-  }, [categoryId, sortType]); //если поменяется категория или сортировка делай запрос на бэкенд на получение новых пицц
+  }, [categoryId, sortType, searchValue]); //если поменяется категория или сортировка делай запрос на бэкенд на получение новых пицц
 
-const books =  items.filter((obj)=>{ //делаю проверку если в объкте то что в переменной то тру
-if(obj.title.includes(searchValue)){
-  return true;
-}
-return false;
-})
-}).map((obj) => <BooksBlock key={obj.id} {...obj} />)
-const skeletons = [...new Array(6)].map((_,index) => <Skeleton key = {index} />)
+  const books = items
+    .filter((obj) => {
+      //делаю проверку если в объкте то что в переменной то тру
+      if (obj.title.toLowerCase().includes(searchValue.toLowerCase())) {
+        return true;
+      }
+      return false; // иначе исключаю
+    })
+    .map((obj) => <BooksBlock key={obj.id} {...obj} />);
+  const skeletons = [...new Array(6)].map((_, index) => (
+    <Skeleton key={index} />
+  ));
 
   return (
     <div className="container">
@@ -59,12 +65,11 @@ const skeletons = [...new Array(6)].map((_,index) => <Skeleton key = {index} />)
       </div>
       <h2 className="content__title">Все книги</h2>
       <div className="content__items">
-        {isLoading
-          ? skeletons
-          : books}
+        {isLoading ? skeletons : books}
         {/*если идёт загрузка создай массив из (6) и замени их .map на скелетон иначе если загрузка не идёт то рендери items.map((obj) =><BooksBlock key ={obj.id} {...obj} возьми объект и его отрендери */}
         {/*если тру покажи скелетон спред сократил скопировал весь obj если пропсы с точно таким названием */}
       </div>
+     <Pagination/>
     </div>
   );
 };
