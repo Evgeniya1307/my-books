@@ -36,6 +36,15 @@ const Home = ({ searchValue}) => {//вытаскиваю данные
     window.scrollTo(0, 0);
   }, [categoryId, sortType]); //если поменяется категория или сортировка делай запрос на бэкенд на получение новых пицц
 
+const books =  items.filter((obj)=>{ //делаю проверку если в объкте то что в переменной то тру
+if(obj.title.includes(searchValue)){
+  return true;
+}
+return false;
+})
+}).map((obj) => <BooksBlock key={obj.id} {...obj} />)
+const skeletons = [...new Array(6)].map((_,index) => <Skeleton key = {index} />)
+
   return (
     <div className="container">
       <div className="content__top">
@@ -51,8 +60,8 @@ const Home = ({ searchValue}) => {//вытаскиваю данные
       <h2 className="content__title">Все книги</h2>
       <div className="content__items">
         {isLoading
-          ? [...new Array(6)].map(() => <Skeleton />)
-          : items.map((obj) => <BooksBlock key={obj.id} {...obj} />)}
+          ? skeletons
+          : books}
         {/*если идёт загрузка создай массив из (6) и замени их .map на скелетон иначе если загрузка не идёт то рендери items.map((obj) =><BooksBlock key ={obj.id} {...obj} возьми объект и его отрендери */}
         {/*если тру покажи скелетон спред сократил скопировал весь obj если пропсы с точно таким названием */}
       </div>
