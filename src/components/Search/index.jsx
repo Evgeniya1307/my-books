@@ -1,10 +1,11 @@
 import React from "react";
-import styles from './Search.module.scss'
+import styles from "./Search.module.scss";
 
-const Search = ({searchValue, setSearchValue}) => { //вытаскиваю данные
+const Search = ({ searchValue, setSearchValue }) => {
+  //вытаскиваю данные
   return (
-  <div className={styles.root}>
-  <svg
+    <div className={styles.root}>
+      <svg
         className={styles.icon}
         xmlns="http://www.w3.org/2000/svg"
         enableBackground="new 0 0 32 32"
@@ -59,20 +60,24 @@ const Search = ({searchValue, setSearchValue}) => { //вытаскиваю да�
           y2="20.366"
         />
       </svg>
-  onChange={(event) => setSearchValue(event.target.value)}
-   className={styles.input} 
-   placeholder="Поиск пиццы..."/> {/*делаю контролируемый инпут инпут value ={searchValue} теперь зависит что есть в этой переменной  */}
-  
-   {searchValue && ( //условный рендер чтобы иконка крестик поя-ся когда в инпуте чтото введенно
-   <svg
-   className={styles.clearIcon}  {/*на очистку в инпуте */}
-   viewBox="0 0 20 20"
-   xmlns="http://www.w3.org/2000/svg">
-   <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
- </svg>
-   </div> 
-   
-  )
-    };
+      <input
+value={searchValue}//зависит от переменной она изм-ся и пойдёт в велью 
+        onChange={(event) => setSearchValue(event.target.value)}
+        className={styles.input}
+        placeholder="Поиск пиццы..."
+      />{" "}
+      {/*делаю контролируемый инпут инпут value ={searchValue} теперь зависит что есть в этой переменной  */}
+      {searchValue && ( //условный рендер чтобы иконка крестик поя-ся когда в инпуте чтото введенно
+        <svg onClick={()=> setSearchValue('')} //при вводе в инпуте очистить данные 
+          className={styles.clearIcon}
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
+        </svg>
+      )}
+    </div>
+  );
+};
 
 export default Search;
