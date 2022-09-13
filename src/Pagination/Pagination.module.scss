@@ -4,14 +4,23 @@
     display: inline-block;
     text-align: center;
     align-items: center;
-    width: 40px;
-    line-height: 38px;
-    height: 40px;
+    width: 45px;
+    line-height: 42px;
+    height: 45px;
     border: 1px solid rgb(237, 76, 76);
     border-radius: 30px;
     margin-right: 10px; //отступ справа
+    cursor: pointer;
+    
+    //выделяю кнопку меняется при выборе 
+    &:hover{
+background-color: white;
+    }
+  
     a {
       display: inline-block;
+      color: rgb(242, 99, 99);
+    
     }
   }
 }
