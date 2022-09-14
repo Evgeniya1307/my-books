@@ -8,6 +8,9 @@ import Cart from "./pages/Cart";
 import NotFound from "./pages/NotFound";
 
 
+//создаю контекст
+const SearchContext= React.createContext('')
+
 function App() {
 //стейт хранящий поле поска
   const  [searchValue, setSearchValue] =React.useState('')// инпут без ничего
