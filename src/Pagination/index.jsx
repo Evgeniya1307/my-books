@@ -10,8 +10,8 @@ const Pagination = ({onChangePage}) => {
       className={styles.root}
       breakLabel="..."
       nextLabel=">" //стрелки назад вперёд
-      onPageChange={(event) => console.log(event)}// в эвенте хра-ся селектед
-      pageRangeDisplayed={8} //на каждую стр вывожу по 8 книг
+      onPageChange={(event) => onChangePage(event.selected+1)}// в эвенте хра-ся селектед
+      pageRangeDisplayed={4} //на каждую стр вывожу по 8 книг
       pageCount={3} //ко-во страниц
       previousLabel="<"
       renderOnZeroPageCount={null}

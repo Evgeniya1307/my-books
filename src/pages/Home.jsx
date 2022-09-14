@@ -14,7 +14,7 @@ const Home = ({ searchValue }) => {
   const [isLoading, setIsLoading] = React.useState(true); // при первом рендере true
   //2 стейта для категории и сортировки
   const [categoryId, setCategoryId] = React.useState(0); //эти параметры передам на бэкенд хранят в себе категорию и фу-ию которая меняет эту категорию
-  //стейт для страниц
+  //стейт нумерации  страниц 
   const[currentPage, setCurrentPage] = React.useState(1)
   const [sortType, setSortType] = React.useState({
     //sorType хр-ся объект в нём св-ва name,sortProperty он пере-ся в компонент выт-ся из велью
@@ -71,7 +71,7 @@ const Home = ({ searchValue }) => {
         {/*если идёт загрузка создай массив из (6) и замени их .map на скелетон иначе если загрузка не идёт то рендери items.map((obj) =><BooksBlock key ={obj.id} {...obj} возьми объект и его отрендери */}
         {/*если тру покажи скелетон спред сократил скопировал весь obj если пропсы с точно таким названием */}
       </div>
-     <Pagination onChangePage={number=> setCurrentPage(number)}/>
+     <Pagination onChangePage={number=> setCurrentPage(number)}/>{/*метод возращающий число */}
     </div>
   );
 };
