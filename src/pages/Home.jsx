@@ -15,7 +15,7 @@ const Home = ({ searchValue }) => {
   //2 стейта для категории и сортировки
   const [categoryId, setCategoryId] = React.useState(0); //эти параметры передам на бэкенд хранят в себе категорию и фу-ию которая меняет эту категорию
   //стейт для страниц
-  const[currentPage, setCurrentPage] = React.useState(0)
+  const[currentPage, setCurrentPage] = React.useState(1)
   const [sortType, setSortType] = React.useState({
     //sorType хр-ся объект в нём св-ва name,sortProperty он пере-ся в компонент выт-ся из велью
     name: "популярности", //соз-ла объект при первом открытии приложения выберется популярные
@@ -30,7 +30,7 @@ const Home = ({ searchValue }) => {
     const category = categoryId > 0 ? `category = ${categoryId}` : "";
     const search = searchValue ? `&search=${searchValue}` : "";//для поиска по бэкенду 
     fetch(
-      `https://62f392d2a84d8c968126cc02.mockapi.io/items?page=1&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
+      `https://62f392d2a84d8c968126cc02.mockapi.io/items?page=${currentPage}&1&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
     ) //проверка по убыванию
       .then((res) => res.json())
       .then((arr) => {
@@ -38,7 +38,7 @@ const Home = ({ searchValue }) => {
         setIsLoading(false); //после загрузки скрываю
       });
     window.scrollTo(0, 0);
-  }, [categoryId, sortType, searchValue]); //если поменяется категория или сортировка делай запрос на бэкенд на получение новых пицц
+  }, [categoryId, sortType, searchValue, currentPage]); //если поменяется категория или сортировка делай запрос на бэкенд на получение новых пицц
 
   const books = items
     .filter((obj) => {
@@ -71,7 +71,7 @@ const Home = ({ searchValue }) => {
         {/*если идёт загрузка создай массив из (6) и замени их .map на скелетон иначе если загрузка не идёт то рендери items.map((obj) =><BooksBlock key ={obj.id} {...obj} возьми объект и его отрендери */}
         {/*если тру покажи скелетон спред сократил скопировал весь obj если пропсы с точно таким названием */}
       </div>
-     <Pagination/>
+     <Pagination onChangePage={number=> setCurrentPage(number)}/>
     </div>
   );
 };
