@@ -17,6 +17,7 @@ function App() {
 
   return (
     <div className="wrapper">
+    <SearchContext.Provider> {/* есть контекст обернула приложение*/}
       <Header searchValue={searchValue} setSearchValue={setSearchValue} />{/*передаю данные */} 
       <div className="content">
         <div className="container">
@@ -28,6 +29,7 @@ function App() {
           </Routes>
         </div>
       </div>
+      </SearchContext.Provider>
     </div>
   ); 
 }
