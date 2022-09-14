@@ -2,25 +2,32 @@
 .root {
   li {
     display: inline-block;
-    text-align: center;
-    align-items: center;
-    width: 45px;
-    line-height: 42px;
-    height: 45px;
-    border: 1px solid rgb(237, 76, 76);
-    border-radius: 30px;
-    margin-right: 10px; //отступ справа
-    cursor: pointer;
-    
-    //выделяю кнопку меняется при выборе 
-    &:hover{
-background-color: white;
-    }
-  
+    //выделяю кнопку меняется при выборе
     a {
+      text-align: center;
+      width: 45px;
+      height: 45px;
+      line-height: 42px;
+      border: 1px solid #fe5f1e;
+      border-radius: 30px;
+      margin-right: 10px; //отступ справа
+      cursor: pointer;
       display: inline-block;
-      color: rgb(242, 99, 99);
-    
+
+      //при выборе кнопки страницы меняется цвет
+      &:hover {
+        background-color: #fe5f1e;
+        color: rgb(205, 197, 197);
+      }
     }
   }
 }
+
+:global {
+    .selected {
+      a {
+        background-color: #fe5f1e;
+        color: #fff;
+      }
+    }
+  }

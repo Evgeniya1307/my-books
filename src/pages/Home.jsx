@@ -14,6 +14,8 @@ const Home = ({ searchValue }) => {
   const [isLoading, setIsLoading] = React.useState(true); // при первом рендере true
   //2 стейта для категории и сортировки
   const [categoryId, setCategoryId] = React.useState(0); //эти параметры передам на бэкенд хранят в себе категорию и фу-ию которая меняет эту категорию
+  //стейт для страниц
+  const[currentPage, setCurrentPage] = React.useState(0)
   const [sortType, setSortType] = React.useState({
     //sorType хр-ся объект в нём св-ва name,sortProperty он пере-ся в компонент выт-ся из велью
     name: "популярности", //соз-ла объект при первом открытии приложения выберется популярные
@@ -28,7 +30,7 @@ const Home = ({ searchValue }) => {
     const category = categoryId > 0 ? `category = ${categoryId}` : "";
     const search = searchValue ? `&search=${searchValue}` : "";//для поиска по бэкенду 
     fetch(
-      `https://62f392d2a84d8c968126cc02.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${search}`
+      `https://62f392d2a84d8c968126cc02.mockapi.io/items?page=1&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
     ) //проверка по убыванию
       .then((res) => res.json())
       .then((arr) => {
