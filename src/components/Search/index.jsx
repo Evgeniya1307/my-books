@@ -1,8 +1,11 @@
 import React from "react";
+
+import { SearchContext } from "../../App";
 import styles from "./Search.module.scss";
 
-const Search = ({ searchValue, setSearchValue }) => {
-  //вытаскиваю данные
+const Search = () => {
+  const { searchValue, setSearchValue } = React.useContext(SearchContext);//SearchContext из этой переменной с помощью хука useContext вытаскиваю содержимое этой переменной которая хр-ся в велью
+
   return (
     <div className={styles.root}>
       <svg
@@ -61,14 +64,15 @@ const Search = ({ searchValue, setSearchValue }) => {
         />
       </svg>
       <input
-value={searchValue}//зависит от переменной она изм-ся и пойдёт в велью 
+        value={searchValue} //зависит от переменной она изм-ся и пойдёт в велью
         onChange={(event) => setSearchValue(event.target.value)}
         className={styles.input}
         placeholder="Поиск пиццы..."
       />{" "}
       {/*делаю контролируемый инпут инпут value ={searchValue} теперь зависит что есть в этой переменной  */}
       {searchValue && ( //условный рендер чтобы иконка крестик поя-ся когда в инпуте чтото введенно
-        <svg onClick={()=> setSearchValue('')} //при вводе в инпуте очистить данные 
+        <svg
+          onClick={() => setSearchValue("")} //при вводе в инпуте очистить данные
           className={styles.clearIcon}
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"

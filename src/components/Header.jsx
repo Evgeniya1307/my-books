@@ -3,7 +3,7 @@ import Img from '../assets/img/Без названия.jpg';
 import {Link} from "react-router-dom"
 import Search from './Search';
 
-function Header ({searchValue, setSearchValue}){ //получаю данные
+function Header (){ 
     return( 
       <div className ="header">
     <div className ="container">
@@ -22,7 +22,7 @@ function Header ({searchValue, setSearchValue}){ //получаю данные
           </div>
       </div>
       </Link>
-      <Search searchValue={searchValue} setSearchValue={setSearchValue}/>{/*передала данные */}
+      <Search />
       <div className="header__cart">
         <Link to ="/cart" className ="button button--cart">
           <span>52 €</span>
