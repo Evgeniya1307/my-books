@@ -5,8 +5,12 @@ import Sort from "../components/Sort";
 import BooksBlock from "../components/BooksBlock";
 import Skeleton from "../components/BooksBlock/Skeleton";
 import Pagination from "../Pagination";
+import { SearchContext } from "../App";
 
-const Home = ({ searchValue }) => {
+const Home = () => {
+ //создаю useContext  для вытаскивания данных
+ const {searchValue} =React.useContext(SearchContext)
+ 
   //вытаскиваю данные
   //состояния для пицц
   const [items, setItems] = React.useState([]); // изначально пустой массив
