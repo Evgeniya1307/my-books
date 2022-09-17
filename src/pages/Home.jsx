@@ -8,7 +8,7 @@ import Pagination from "../Pagination";
 import { SearchContext } from "../App";
 
 const Home = () => {
- //создаю useContext  для вытаскивания данных
+ //создаю useContext  для вытаскивания данных как только изменения ппотом перерисовка
  const {searchValue} =React.useContext(SearchContext)
  
   //вытаскиваю данные
