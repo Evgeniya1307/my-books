@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router";
 
+
 import "./scss/app.scss";
 import Header from "./components/Header";
 import Home from "./pages/Home";
@@ -13,6 +14,8 @@ export const SearchContext = React.createContext();
 function App() {
   //стейт хранящий поле поска
   const [searchValue, setSearchValue] = React.useState(""); // инпут без ничего
+
+
 
   return (
     <div className="wrapper">
