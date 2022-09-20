@@ -8,3 +8,8 @@ const initialState = {
         sortProperty:'rating',
     }
 }
+
+//создаю сам Slice и передаю в него объект
+const filterSlice = createSlice({
+
+})
