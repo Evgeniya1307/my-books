@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from '@reduxjs/toolkit';
 
 import Categories from "../components/Categories";
 import Sort from "../components/Sort";
@@ -8,16 +9,27 @@ import Pagination from "../Pagination";
 import { SearchContext } from "../App";
 
 const Home = () => {
- //создаю useContext  для вытаскивания данных как только изменения ппотом перерисовка
- const {searchValue} =React.useContext(SearchContext)
+  const categoryId = useSelector();//вытаскиваю всё хранилище 
  
-  //вытаскиваю данные
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  //создаю useContext  для вытаскивания данных как только изменения ппотом перерисовка
+ const {searchValue} =React.useContext(SearchContext)
   //состояния для пицц
   const [items, setItems] = React.useState([]); // изначально пустой массив
   //будет понятно что отобразить скелетон при загрузке или пиццу
   const [isLoading, setIsLoading] = React.useState(true); // при первом рендере true
   //2 стейта для категории и сортировки
-  const [categoryId, setCategoryId] = React.useState(0); //эти параметры передам на бэкенд хранят в себе категорию и фу-ию которая меняет эту категорию
+  //const [categoryId, setCategoryId] = React.useState(0); //эти параметры передам на бэкенд хранят в себе категорию и фу-ию которая меняет эту категорию
   //стейт нумерации  страниц 
   const[currentPage, setCurrentPage] = React.useState(1)
   const [sortType, setSortType] = React.useState({
