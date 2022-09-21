@@ -15,7 +15,7 @@ const filterSlice = createSlice({
   initialState,
   // делаю actions(команды)
   reducers: {
-    // передаю объект и метод отвечающий за id
+    // передаю объект и метод отвечающий за id меняющий категорию
     setCategoryId(state, action) {
       // при вызове получит стейт и действие
       state.categoryId = action.payload; //в стейт сохраняю что придёт в action.payload ,значение будет хр-ся action.payload

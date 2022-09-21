@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { setCategoryId } from "../redux/slices/filterSlice";
 import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import BooksBlock from "../components/BooksBlock";
@@ -29,7 +30,9 @@ const Home = () => {
   });
 
   //получаю номер категории
-  const onChangeCategory = (id) => {};
+  const onChangeCategory = (id) => {
+    dispatch(setCategoryId)//передала в диспатч и он меняет категорию
+  };
 
   React.useEffect(() => {
     setIsLoading(true); //перед загрузкой
