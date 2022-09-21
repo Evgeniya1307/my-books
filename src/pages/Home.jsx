@@ -10,8 +10,7 @@ import Pagination from "../Pagination";
 import { SearchContext } from "../App";
 
 const Home = () => {
-  const dispatch = useDispatch();//вернёт в dispatch функцию
-
+  const dispatch = useDispatch(); //вернёт в dispatch функцию которая меняет стейт
   const categoryId = useSelector((state) => state.filter.categoryId); //вытаскиваю всё хранилище
   //создаю useContext  для вытаскивания данных как только изменения ппотом перерисовка
   const { searchValue } = React.useContext(SearchContext);
@@ -19,19 +18,16 @@ const Home = () => {
   const [items, setItems] = React.useState([]); // изначально пустой массив
   //будет понятно что отобразить скелетон при загрузке или пиццу
   const [isLoading, setIsLoading] = React.useState(true); // при первом рендере true
-  //2 стейта для категории и сортировки
-  //const [categoryId, setCategoryId] = React.useState(0); //эти параметры передам на бэкенд хранят в себе категорию и фу-ию которая меняет эту категорию
-  //стейт нумерации  страниц
-  const [currentPage, setCurrentPage] = React.useState(1);
-  const [sortType, setSortType] = React.useState({
+  //const [categoryId, setCategoryId] = React.useState(0); //эти параметры передам на бэкенд хранят в себе категорию и фу-ию которая меняет эту категорию  //2 стейта для категории и сортировки
+  const [currentPage, setCurrentPage] = React.useState(1);//стейт нумерации  страниц
+ // const [sortType, setSortType] = React.useState({
     //sorType хр-ся объект в нём св-ва name,sortProperty он пере-ся в компонент выт-ся из велью
-    name: "популярности", //соз-ла объект при первом открытии приложения выберется популярные
-    sortProperty: "rating", // по умолчанию сортировка по рейтингу
-  });
-
+   // name: "популярности", //соз-ла объект при первом открытии приложения выберется популярные
+   // sortProperty: "rating", // по умолчанию сортировка по рейтингу
+  //});
   //получаю номер категории
   const onChangeCategory = (id) => {
-    dispatch(setCategoryId)//передала в диспатч и он меняет категорию
+    dispatch(setCategoryId(id)); //передала в диспатч и он меняет категорию
   };
 
   React.useEffect(() => {
@@ -71,8 +67,7 @@ const Home = () => {
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
         {/*значение передала в value и фу-ия будет менять стейт при нажатии  */}
         {/*прокидываю пропс этого компонента вытащить данные */}
-        <Sort value={sortType} onChangeSort={(i) => setSortType(i)} />
-        {/*сортировка по по полуряности */}
+        <Sort  />
       </div>
       <h2 className="content__title">Все книги</h2>
       <div className="content__items">
