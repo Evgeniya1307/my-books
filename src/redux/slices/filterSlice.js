@@ -20,11 +20,13 @@ const filterSlice = createSlice({
       // при вызове получит стейт и действие
       state.categoryId = action.payload; //в стейт сохраняю что придёт в action.payload ,значение будет хр-ся action.payload
     },
+    //метод для диспатча меняющий сортировку
+    setSort(state, action) {
+      state.sort = action.payload;
+    },
   },
 });
 
-export const {setCategoryId}=filterSlice.actions//вытащи setCategoryId
+export const { setCategoryId, setSort } = filterSlice.actions; //вытащи setCategoryId, setSort
 
-export default filterSlice.reducer
-
-
+export default filterSlice.reducer;

@@ -1,24 +1,26 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
+import {setSort} from "../redux/slices/filterSlice";
+
+//массив для списка
+const list = [
+  { name: "популярности (DESC)", sortProperty: "rating" }, //убывание
+  { name: "популярности (ASC)", sortProperty: "-rating" }, //возрастание
+  { name: "цене (DESC)", sortProperty: "price" },
+  { name: "цене (ASC)", sortProperty: "-price" },
+  { name: "алфавиту (DESC)", sortProperty: "title" },
+  { name: "алфавиту (ASC)", sortProperty: "-title" },
+];
+
 function Sort() {
   const dispatch = useDispatch();
-const sort = useSelector(state=>state.filter.sort)//вытаскиваю объект св-ва сорт
- 
-//оживляю при клике открывался список
+  const sort = useSelector((state) => state.filter.sort); //вытаскиваю из редакса  объект св-ва сорт
+  //оживляю при клике открывался список
   const [open, setOpen] = React.useState(false); // блок скрыт это будет как со светом включен выключен
-  //массив для списка
-  const list = [
-    { name: "популярности(DESC)", sortProperty: "rating" }, //убывание
-    { name: "популярности (ASC)", sortProperty: "-rating" }, //возрастание
-    { name: "цене(DESC)", sortProperty: "price" },
-    { name: "цене(ASC)", sortProperty: "-price" },
-    { name: "алфавиту(DESC)", sortProperty: "title" },
-    { name: "алфавиту(ASC)", sortProperty: "-title" },
-  ];
-
-  const onClickListItem = (i) => {
-    onChangeSort(i); // выбери в сортировки пункт
+  
+  const onClickListItem = (obj) => {
+    dispatch(setSort(obj));
     setOpen(false); // далее скройся там где сортировка
   };
 
@@ -38,7 +40,7 @@ const sort = useSelector(state=>state.filter.sort)//вытаскиваю объ�
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setOpen(!open)}>{sort.name}</span>{" "} 
+        <span onClick={() => setOpen(!open)}>{sort.name}</span>{" "}
         {/*value заменила на sort */}
       </div>
       {/*чтобы этот блок отобразился если open try */}

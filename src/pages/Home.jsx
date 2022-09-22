@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
 import { setCategoryId } from "../redux/slices/filterSlice";
 import Categories from "../components/Categories";
@@ -11,9 +12,10 @@ import { SearchContext } from "../App";
 
 const Home = () => {
   const dispatch = useDispatch(); //вернёт в dispatch функцию которая меняет стейт
-  const categoryId = useSelector((state) => state.filter.categoryId); //вытаскиваю всё хранилище
-  //создаю useContext  для вытаскивания данных как только изменения ппотом перерисовка
-  const { searchValue } = React.useContext(SearchContext);
+  const {categoryId, sort} = useSelector((state) => state.filter); //вытаскиваю всё хранилище и категории и сорт
+
+
+  const { searchValue } = React.useContext(SearchContext);//создаю useContext  для вытаскивания данных как только изменения ппотом перерисовка
   //состояния для пицц
   const [items, setItems] = React.useState([]); // изначально пустой массив
   //будет понятно что отобразить скелетон при загрузке или пиццу
@@ -33,20 +35,24 @@ const Home = () => {
   React.useEffect(() => {
     setIsLoading(true); //перед загрузкой
 
-    const sortBy = sortType.sortProperty.replace("-", ""); //из свойства удали -
-    const order = sortType.sortProperty.includes("-") ? "asc" : "desc"; // проверяй если в сортировке - если includes есть - то делать asc возрастанию иначе desc по убыванию
+    const sortBy = sort.sortProperty.replace("-", ""); //из свойства удали -
+    const order = sort.sortProperty.includes("-") ? "asc" : "desc"; // проверяй если в сортировке - если includes есть - то делать asc возрастанию иначе desc по убыванию
     const category = categoryId > 0 ? `category = ${categoryId}` : "";
     const search = searchValue ? `&search=${searchValue}` : ""; //для поиска по бэкенду
-    fetch(
-      `https://62f392d2a84d8c968126cc02.mockapi.io/items?page=${currentPage}&1&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
-    ) //проверка по убыванию
-      .then((res) => res.json())
-      .then((arr) => {
-        setItems(arr); //воз-ет новые пиццы
-        setIsLoading(false); //после загрузки скрываю
-      });
+    // fetch(
+    //   `https://62f392d2a84d8c968126cc02.mockapi.io/items?page=${currentPage}&1&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
+    // ) //проверка по убыванию
+    //   .then((res) => res.json())
+    //   .then((arr) => {
+    //     setItems(arr); //воз-ет новые пиццы
+    //     setIsLo ading(false); //после загрузки скрываю
+    //   });
+
+axios.get(`https://62f392d2a84d8c968126cc02.mockapi.io/items?page=${currentPage}&1&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`)
+.then()//ук-аю что вытащить ответ от сервера
+
     window.scrollTo(0, 0);
-  }, [categoryId, sortType, searchValue, currentPage]); //если поменяется категория или сортировка делай запрос на бэкенд на получение новых пицц
+  }, [categoryId, sort.sortProperty, searchValue, currentPage]); //если поменяется категория или сортировка делай запрос на бэкенд на получение новых пицц
 
   const books = items
     .filter((obj) => {

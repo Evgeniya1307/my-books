@@ -1,8 +1,5 @@
 import React from 'react'
 
-
-
-
 function Categories ({value, onChangeCategory}){
 //создаю массив для рендеринга списка он статичный не меняется
 const categories=[
@@ -11,7 +8,7 @@ const categories=[
   'Про Любовь',
   'Про Дружбу',
   'Энциклопедия для Девочек',
-  'Мода',
+  'Мода'
 ]
 //со-ла фу-ию анонимную её вызов при клике заставит вызвать другую функцию (небудет перересовок)
 // const onClickCategory=(index)=>{
