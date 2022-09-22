@@ -39,19 +39,12 @@ const Home = () => {
     const order = sort.sortProperty.includes("-") ? "asc" : "desc"; // проверяй если в сортировке - если includes есть - то делать asc возрастанию иначе desc по убыванию
     const category = categoryId > 0 ? `category = ${categoryId}` : "";
     const search = searchValue ? `&search=${searchValue}` : ""; //для поиска по бэкенду
-    // fetch(
-    //   `https://62f392d2a84d8c968126cc02.mockapi.io/items?page=${currentPage}&1&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
-    // ) //проверка по убыванию
-    //   .then((res) => res.json())
-    //   .then((arr) => {
-    //     setItems(arr); //воз-ет новые пиццы
-    //     setIsLo ading(false); //после загрузки скрываю
-    //   });
+    
 
 axios.get(`https://62f392d2a84d8c968126cc02.mockapi.io/items?page=${currentPage}&1&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`)
 .then(res => {//ук-аю что вытащить ответ от сервера
 setItems(res.data);//в data ответ от бэкенда хр-ся
-setIsLoading(false)
+setIsLoading(false);//после загрузки скрываю
 })
     window.scrollTo(0, 0);
   }, [categoryId, sort.sortProperty, searchValue, currentPage]); //если поменяется категория или сортировка делай запрос на бэкенд на получение новых пицц
