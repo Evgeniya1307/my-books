@@ -49,8 +49,10 @@ const Home = () => {
     //   });
 
 axios.get(`https://62f392d2a84d8c968126cc02.mockapi.io/items?page=${currentPage}&1&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`)
-.then()//ук-аю что вытащить ответ от сервера
-
+.then(res => {//ук-аю что вытащить ответ от сервера
+setItems(res.data);//в data ответ от бэкенда хр-ся
+setIsLoading(false)
+})
     window.scrollTo(0, 0);
   }, [categoryId, sort.sortProperty, searchValue, currentPage]); //если поменяется категория или сортировка делай запрос на бэкенд на получение новых пицц
 
