@@ -25,6 +25,10 @@ const filterSlice = createSlice({
     setSort(state, action) {
       state.sort = action.payload;
     },
+    //метод для пагинации
+    setPageCount(state, action) {
+      state.pageCount = action.payload;
+    }
   },
 });
 
