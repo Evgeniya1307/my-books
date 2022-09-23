@@ -1,17 +1,35 @@
 import React from "react";
+import debounce from "lodash.debounce";
+
 
 import { SearchContext } from "../../App";
 import styles from "./Search.module.scss";
 
 const Search = () => {
-  const { searchValue, setSearchValue } = React.useContext(SearchContext);//SearchContext из этой переменной с помощью хука useContext вытаскиваю содержимое этой переменной которая хр-ся в велью
-const inputRef = React.useRef()// reactjs возьми свою логику сохрани в переменной inputRef
-//focus в инпуте
-const onClickClear =()=> {
-  setSearchValue('')
-  inputRef.current.focus()
-}
- 
+  const [value, setValue] = React.useState("");//за быстрое отображение из инпута данных
+  const {setSearchValue } = React.useContext(SearchContext); //SearchContext из этой переменной с помощью хука useContext вытаскиваю содержимое этой переменной которая хр-ся в велью
+  const inputRef = React.useRef(); // reactjs возьми свою логику сохрани в переменной inputRef
+
+  //focus в инпуте
+  const onClickClear = () => {
+    setSearchValue(''); //чтобы делать поиск
+        inputRef.current.focus();
+  };
+
+  //сох-ла ссылку на фун-ию когда запросы идут и сде-ла её отложенной она меняет searchValue
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const updateSearchValue = React.useCallback(
+    debounce((str) => {
+      
+    }, 1000),
+    []
+  );
+
+  const onChangeInput = (event) => {
+    setValue(event.target.value); //меняю инпут
+    updateSearchValue(event.target.value); //выз-ся каждый раз как меняе-ся инпут
+  };
+
   return (
     <div className={styles.root}>
       <svg
@@ -70,19 +88,20 @@ const onClickClear =()=> {
         />
       </svg>
       <input
-      ref={inputRef}
-        value={searchValue} //зависит от переменной она изм-ся и пойдёт в велью
-        onChange={(event) => setSearchValue(event.target.value)}
+        ref={inputRef}
+        value={value} //зависит от переменной она изм-ся и пойдёт в велью
+        onChange={onChangeInput}
         className={styles.input}
-        placeholder="Поиск пиццы..."
-      />{" "}
+        placeholder="Поиск Книги..."
+      />
       {/*делаю контролируемый инпут инпут value ={searchValue} теперь зависит что есть в этой переменной  */}
-      {searchValue && ( //условный рендер чтобы иконка крестик поя-ся когда в инпуте чтото введенно
+      {value && ( //условный рендер чтобы иконка крестик поя-ся когда в инпуте чтото введенно
         <svg
           onClick={onClickClear} //при вводе в инпуте очищаются данные и фокус остается
           className={styles.clearIcon}
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
+          
         >
           <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
         </svg>
