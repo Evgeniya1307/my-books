@@ -27,7 +27,7 @@ const filterSlice = createSlice({
     },
     //метод для пагинации
     setCurrentPage(state, action) { //заменила название на setCurrentPage
-      state.pageCount = action.payload;
+      state.currentPage = action.payload; //заменила на currentPage
     }
   },
 });
