@@ -20,7 +20,7 @@ const Search = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const updateSearchValue = React.useCallback(
     debounce((str) => {
-      
+      setSearchValue(str);//обновить из контекста то что есть в App
     }, 1000),
     []
   );
