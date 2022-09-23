@@ -26,12 +26,12 @@ const filterSlice = createSlice({
       state.sort = action.payload;
     },
     //метод для пагинации
-    setPageCount(state, action) {
+    setCurrentPage(state, action) { //заменила название на setCurrentPage
       state.pageCount = action.payload;
     }
   },
 });
 
-export const { setCategoryId, setSort } = filterSlice.actions; //вытащи setCategoryId, setSort
+export const { setCategoryId, setSort, setCurrentPage } = filterSlice.actions; //вытащи setCategoryId, setSort
 
 export default filterSlice.reducer;
