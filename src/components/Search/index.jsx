@@ -12,8 +12,9 @@ const Search = () => {
 
   //focus в инпуте
   const onClickClear = () => {
-    setSearchValue(''); //чтобы делать поиск
-        inputRef.current.focus();
+setSearchValue(''); //чтобы делать поиск стейт в app
+    setValue('')// для фокуса возвращения
+inputRef.current.focus();
   };
 
   //сох-ла ссылку на фун-ию когда запросы идут и сде-ла её отложенной она меняет searchValue
@@ -21,7 +22,7 @@ const Search = () => {
   const updateSearchValue = React.useCallback(
     debounce((str) => {
       setSearchValue(str);//обновить из контекста то что есть в App
-    }, 1000),
+    }, 250),
     []
   );
 

@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 //делаю первое со-ие
 const initialState = {
   categoryId: 0,
+  pageCount:1, //пагинация
   sort: {
     name: "по популярности",
     sortProperty: "rating",
