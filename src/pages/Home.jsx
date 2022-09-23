@@ -12,7 +12,9 @@ import { SearchContext } from "../App";
 
 const Home = () => {
   const dispatch = useDispatch(); //вернёт в dispatch функцию которая меняет стейт
-  const { categoryId, sort, pageCount } = useSelector((state) => state.filter); //вытаскиваю всё хранилище и категории и сорт
+  const { categoryId, sort, currentPage } = useSelector(
+    (state) => state.filter
+  ); //вытаскиваю всё хранилище и категории и сорт
 
   const { searchValue } = React.useContext(SearchContext); //создаю useContext  для вытаскивания данных как только изменения ппотом перерисовка
   //состояния для пицц
@@ -25,7 +27,7 @@ const Home = () => {
   };
 
   const onChangePage = (number) => {
-    dispatch(setPageCount(number));
+    dispatch(setCurrentPage(number));
   };
 
   React.useEffect(() => {
@@ -38,7 +40,7 @@ const Home = () => {
 
     axios
       .get(
-        `https://62f392d2a84d8c968126cc02.mockapi.io/items?page=${pageCount}&1&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
+        `https://62f392d2a84d8c968126cc02.mockapi.io/items?page=${currentPage}&1&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
       )
       .then((res) => {
         //ук-аю что вытащить ответ от сервера
@@ -46,7 +48,7 @@ const Home = () => {
         setIsLoading(false); //после загрузки скрываю
       });
     window.scrollTo(0, 0);
-  }, [categoryId, sort.sortProperty, searchValue, pageCount]); //если поменяется категория или сортировка делай запрос на бэкенд на получение новых книг
+  }, [categoryId, sort.sortProperty, searchValue, currentPage]); //если поменяется категория или сортировка делай запрос на бэкенд на получение новых книг
 
   const books = items
     .filter((obj) => {
@@ -75,7 +77,7 @@ const Home = () => {
         {/*если идёт загрузка создай массив из (6) и замени их .map на скелетон иначе если загрузка не идёт то рендери items.map((obj) =><BooksBlock key ={obj.id} {...obj} возьми объект и его отрендери */}
         {/*если тру покажи скелетон спред сократил скопировал весь obj если пропсы с точно таким названием */}
       </div>
-      <Pagination value={pageCount} onChangePage={onChangePage} />
+      <Pagination currentPage={currentPage} onChangePage={onChangePage} />
       {/*метод возращающий число */}
     </div>
   );
