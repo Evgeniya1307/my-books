@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import qs from 'qs'
 
 import { setCategoryId, setCurrentPage } from "../redux/slices/filterSlice";
 import Categories from "../components/Categories";
@@ -50,9 +51,14 @@ const Home = () => {
     window.scrollTo(0, 0);
   }, [categoryId, sort.sortProperty, searchValue, currentPage]); //если поменяется категория или сортировка делай запрос на бэкенд на получение новых книг
 
+//useEffect отвечающий за парсинг и вшивание параметров в адрес,строку
+React.useEffect(()=>{
+//если пришли параметры превращаю в целую строчку
+},[categoryId, sort.sortProperty, searchValue, currentPage])
+
   const books = items
     .filter((obj) => {
-      //делаю проверку если в объкте то что в переменной то тру
+      //делаю проверку если в объкте то что в переменной то true
       if (obj.title.toLowerCase().includes(searchValue.toLowerCase())) {
         return true;
       }
