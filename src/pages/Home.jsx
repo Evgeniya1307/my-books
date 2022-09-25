@@ -24,7 +24,7 @@ const Home = () => {
   const [isLoading, setIsLoading] = React.useState(true); // при первом рендере true
 
   const onChangeCategory = (id) => {
-    dispatch(setCategoryId(id)); //передала в диспатч и он меняет категорию
+    dispatch(setCategoryId(id)); //передала в диспатч  меняет категорию
   };
 
   const onChangePage = (number) => {
