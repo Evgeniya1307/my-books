@@ -3,8 +3,11 @@ import Img from '../assets/img/Без названия.jpg';
 import {Link} from "react-router-dom"
 import Search from './Search';
 
+import {useSelector} from 'react-router-dom'
+
 function Header (){ 
-    return( 
+  const {items, totalPrice}= useSelector(selectCart);//передала название фу-ию которую соз-ла в cartslice
+  return( 
       <div className ="header">
     <div className ="container">
     <Link to ="/" > {/*при клике перейдёт на главную */}

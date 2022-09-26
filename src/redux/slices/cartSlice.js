@@ -16,7 +16,7 @@ export const cartSlice = createSlice({
     removeItem(state, action) {
         state.items.filter(obj =>  obj.id !== action.payload);//найти объект у которого id не совпадает с action.payload я payload буду передавать id )
   },
-  clearItems(state,action){
+  clearItems(state){
     state.items = [];
     state.totalPrice = 0;//очищаю тоталпрайс
   }
