@@ -35,7 +35,7 @@ const Home = () => {
   //проверяю есть ли в url эти параметры 
 React.useEffect(()=>{
   if(window.location.search){ //если есть то парсить и превращать в объект
-
+const params =qs.parse(window.location.search.substring(1));//с помощью qs парсинг, substring(убираю ?)
   }
 }, [])
 
