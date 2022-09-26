@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {setSort} from "../redux/slices/filterSlice";
 
 //массив для списка
-const list = [
+export const sortList = [
   { name: "популярности (DESC)", sortProperty: "rating" }, //убывание
   { name: "популярности (ASC)", sortProperty: "-rating" }, //возрастание
   { name: "цене (DESC)", sortProperty: "price" },
@@ -47,7 +47,7 @@ function Sort() {
       {open && (
         <div className="sort__popup">
           <ul>
-            {list.map((obj, i) => (
+            {sortList.map((obj, i) => (
               <li
                 key={i}
                 onClick={() => onClickListItem(obj)} //передаю целый объект

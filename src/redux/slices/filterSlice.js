@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 //делаю первое со-ие
 const initialState = {
   categoryId: 0,
-  currentPage:1, //пагинация
+  currentPage: 1, //пагинация
   sort: {
     name: "по популярности",
     sortProperty: "rating",
@@ -30,13 +30,15 @@ const filterSlice = createSlice({
       //заменила название на setCurrentPage
       state.currentPage = action.payload; //заменила на currentPage
     },
-    //метод 
-    setfilter(state,action){
-state.currentPage=action.payload.currentPage; //стейт когда придёт экшин вшей то что из payload
-    }
+    setFilters(state, action) {
+      state.sort = action.payload.sort;
+      state.currentPage = Number(action.payload.currentPage); //стейт когда придёт экшин вшей то что из payload
+      state.categoryId = Number(action.payload.categoryId);
+    },
   },
 });
 
-export const { setCategoryId, setSort, setCurrentPage, setfilter} = filterSlice.actions; //вытащи setCategoryId, setSort
+export const { setCategoryId, setSort, setCurrentPage, setFilters } =
+  filterSlice.actions; //вытащи setCategoryId, setSort
 
 export default filterSlice.reducer;

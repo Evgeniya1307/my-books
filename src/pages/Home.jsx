@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import qs from 'qs'
 
-import { setCategoryId, setCurrentPage, setfilter } from "../redux/slices/filterSlice";
+import { setCategoryId, setCurrentPage, setFilters } from "../redux/slices/filterSlice";
 import Categories from "../components/Categories";
-import Sort from "../components/Sort";
+import Sort, { sortList } from "../components/Sort";
 import BooksBlock from "../components/BooksBlock";
 import Skeleton from "../components/BooksBlock/Skeleton";
 import Pagination from "../Pagination";
@@ -36,7 +36,15 @@ const Home = () => {
 React.useEffect(()=>{
   if(window.location.search){ //если есть то парсить и превращать в объект
 const params =qs.parse(window.location.search.substring(1));//с помощью qs парсинг, substring(убираю ?)
-  }
+
+const sort = sortList.find(obj=> obj.sortProperty === sortProperty)//пробежалась по кажд,св-ву в объекте и найти что есть в парамс sortProperty
+
+dispatch(setFilters({
+  ...params,
+  sort,
+ })
+ )
+}
 }, [])
 
 
