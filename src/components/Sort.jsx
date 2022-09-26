@@ -28,11 +28,11 @@ function Sort() {
   //при первом рендере по ссылке проверяю был ли клик
   React.useEffect(()=>{
 const handleClickQutside = (event)=> {  // храню ссылку внутри этой переменной
-  if(!event.path.includes(sortRef.current)){
+  if(sortRef.current && !event.path.includes(sortRef.current)){
     setOpen(false)
   }
 }
-document.body.addEventListener('clicl',handleClickQutside);
+document.body.addEventListener('clicl',handleClickQutside); //  document.body.addEventListener("click", делает клик то передай ниже фу-ию
 
 return()=>{
   document.body.removeEventListener('clicl',handleClickQutside);
