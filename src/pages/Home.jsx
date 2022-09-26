@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector, useNavigate } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import qs from "qs";
 
@@ -19,9 +19,11 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch(); //вернёт в dispatch функцию которая меняет стейт
+  const isSearch = React.useRef(false);//поиска пока нет
+  
   const { categoryId, sort, currentPage } = useSelector(
     (state) => state.filter); //вытаскиваю всё хранилище и категории и сорт
-  const isSearch = React.useRef(false);//поиска пока нет
+  
 
   const { searchValue } = React.useContext(SearchContext); //создаю useContext  для вытаскивания данных как только изменения ппотом перерисовка
   //состояния для пицц
@@ -29,9 +31,9 @@ const Home = () => {
   //будет понятно что отобразить скелетон при загрузке или пиццу
   const [isLoading, setIsLoading] = React.useState(true); // при первом рендере true
 
-  const onChangeCategory = (id) => {
+  const onChangeCategory = React.useCallback((id) => {
     dispatch(setCategoryId(id)); //передала в диспатч  меняет категорию
-  };
+  }, []);
 
   const onChangePage = (page) => {
     dispatch(setCurrentPage(page));
@@ -56,7 +58,23 @@ const Home = () => {
       });
   };
 
-  //проверяю есть ли в url эти параметры
+  // Если изменили параметры и был первый рендер
+  React.useEffect(() => {
+    if (isMounted.current) {
+      const queryString = qs.stringify({
+        sortProperty: sort.sortProperty,
+        categoryId,
+        currentPage,
+      });
+
+      navigate(`?${queryString}`);
+    }
+    isMounted.current = true;
+  }, [categoryId, sort.sortProperty, currentPage]);
+  
+  
+  
+// Если был первый рендер, то проверяем URl-параметры и сохраняем в редуксе
   React.useEffect(() => {
     if (window.location.search) {
       //если есть то парсить и превращать в объект
@@ -68,23 +86,32 @@ const Home = () => {
         setFilters({
           ...params,
           sort,
-        })
+        }),
       );
+      isSearch.current = true;
     }
   }, []);
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
-    //делаю проверку при первом рендере нужно ли отправлять запрос, если пришли не отправлять ждать диспатча
+    if(!isSearch.current){  //делаю проверку при первом рендере нужно ли отправлять запрос, если пришли параметры не отправлять ждать dispatch
+     fetchBooks();// если нет параметров то делаю запрос 
+    }
+    isSearch.current = false;
   }, [categoryId, sort.sortProperty, searchValue, currentPage]); //если поменяется категория или сортировка делай запрос на бэкенд на получение новых книг
 
   //useEffect отвечающий за парсинг и вшивание параметров в адрес,строку
   React.useEffect(() => {
-    //если пришли параметры превращаю в целую строчку
+     //если пришли параметры превращаю в целую строчку
+    const queryString =qs.stringify({
+      sortProperty: sort.sortProperty,
+      categoryId,
+      currentPage
+    });
+    navigate(`?${queryString}`)
   }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
-  const books = items
-    .filter((obj) => {
+  const books = items.filter((obj) => {
       //делаю проверку если в объкте то что в переменной то true
       if (obj.title.toLowerCase().includes(searchValue.toLowerCase())) {
         return true;
