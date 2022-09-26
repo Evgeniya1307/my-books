@@ -30,9 +30,13 @@ const filterSlice = createSlice({
       //заменила название на setCurrentPage
       state.currentPage = action.payload; //заменила на currentPage
     },
+    //метод 
+    setfilter(state,action){
+state.currentPage=action.payload.currentPage; //стейт когда придёт экшин вшей то что из payload
+    }
   },
 });
 
-export const { setCategoryId, setSort, setCurrentPage } = filterSlice.actions; //вытащи setCategoryId, setSort
+export const { setCategoryId, setSort, setCurrentPage, setfilter} = filterSlice.actions; //вытащи setCategoryId, setSort
 
 export default filterSlice.reducer;

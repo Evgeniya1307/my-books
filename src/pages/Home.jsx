@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import qs from 'qs'
 
-import { setCategoryId, setCurrentPage } from "../redux/slices/filterSlice";
+import { setCategoryId, setCurrentPage, setfilter } from "../redux/slices/filterSlice";
 import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import BooksBlock from "../components/BooksBlock";
