@@ -21,12 +21,26 @@ function Sort() {
   
 
   const onClickListItem = (obj) => {
-    dispatch(setSort(obj));
+    dispatch(setSort(obj));// вернёт объект
     setOpen(false); // далее скройся там где сортировка
   };
 
+  //при первом рендере по ссылке проверяю был ли клик
+  React.useEffect(()=>{
+const handleClickQutside = (event)=> {
+  if(!event.path.includes(sortRef.current)){
+    setOpen(false)
+  }
+}
+document.body.addEventListener('clicl',handleClickQutside);
+
+return()=>{
+  document.body.removeEventListener('clicl',handleClickQutside);
+}
+  }, []);
+
   return (
-    <div className="sort">
+    <div ref={sortRef} className="sort">
       <div className="sort__label">
         <svg
           width="10"
