@@ -16,9 +16,10 @@ export const sortList = [
 function Sort() {
   const dispatch = useDispatch();
   const sort = useSelector((state) => state.filter.sort); //вытаскиваю из редакса  объект св-ва сорт
-  //оживляю при клике открывался список
+  const sortRef = React.useRef();//ссылка на дом элемент при скрытии сортировки
   const [open, setOpen] = React.useState(false); // блок скрыт это будет как со светом включен выключен
   
+
   const onClickListItem = (obj) => {
     dispatch(setSort(obj));
     setOpen(false); // далее скройся там где сортировка
@@ -54,7 +55,7 @@ function Sort() {
                 className={
                   sort.sortProperty === obj.sortProperty ? "active" : ""
                 }
-              >
+              > 
                 {" "}
                 {/*проверка что выбрала по популярности т,е то что у родителя хранится value c тем что рендерю */}
                 {obj.name}

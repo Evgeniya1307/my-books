@@ -20,11 +20,11 @@ const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch(); //вернёт в dispatch функцию которая меняет стейт
   const isSearch = React.useRef(false);//поиска пока нет
+  const isMounted = React.useRef(false);
   
   const { categoryId, sort, currentPage } = useSelector(
     (state) => state.filter); //вытаскиваю всё хранилище и категории и сорт
   
-
   const { searchValue } = React.useContext(SearchContext); //создаю useContext  для вытаскивания данных как только изменения ппотом перерисовка
   //состояния для пицц
   const [items, setItems] = React.useState([]); // изначально пустой массив
@@ -60,19 +60,16 @@ const Home = () => {
 
   // Если изменили параметры и был первый рендер
   React.useEffect(() => {
-    if (isMounted.current) {
+    if (isMounted.current) { // если true(был первый рендер) то делать нижнюю инфу
       const queryString = qs.stringify({
         sortProperty: sort.sortProperty,
         categoryId,
         currentPage,
       });
-
       navigate(`?${queryString}`);
     }
     isMounted.current = true;
   }, [categoryId, sort.sortProperty, currentPage]);
-  
-  
   
 // Если был первый рендер, то проверяем URl-параметры и сохраняем в редуксе
   React.useEffect(() => {
@@ -101,28 +98,9 @@ const Home = () => {
     isSearch.current = false;
   }, [categoryId, sort.sortProperty, searchValue, currentPage]); //если поменяется категория или сортировка делай запрос на бэкенд на получение новых книг
 
-  //useEffect отвечающий за парсинг и вшивание параметров в адрес,строку
-  React.useEffect(() => {
-     //если пришли параметры превращаю в целую строчку
-    const queryString =qs.stringify({
-      sortProperty: sort.sortProperty,
-      categoryId,
-      currentPage
-    });
-    navigate(`?${queryString}`)
-  }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
-  const books = items.filter((obj) => {
-      //делаю проверку если в объкте то что в переменной то true
-      if (obj.title.toLowerCase().includes(searchValue.toLowerCase())) {
-        return true;
-      }
-      return false; // иначе исключаю
-    })
-    .map((obj) => <BooksBlock key={obj.id} {...obj} />);
-  const skeletons = [...new Array(6)].map((_, index) => (
-    <Skeleton key={index} />
-  ));
+  const books = items.map((obj) => <BooksBlock key={obj.id} {...obj} />);
+  const skeletons = [...new Array(6)].map((_, index) =>  <Skeleton key={index} />);
 
   return (
     <div className="container">
@@ -153,4 +131,3 @@ export default Home;
 // name: "популярности", //соз-ла объект при первом открытии приложения выберется популярные
 // sortProperty: "rating", // по умолчанию сортировка по рейтингу
 //});
-//получаю номер категории
