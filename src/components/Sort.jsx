@@ -33,9 +33,8 @@ const handleClickQutside = (event)=> {  // храню ссылку внутри 
   }
 }
 document.body.addEventListener('clicl',handleClickQutside); //  document.body.addEventListener("click", делает клик то передай ниже фу-ию
-
 return()=>{
-  document.body.removeEventListener('clicl',handleClickQutside);
+  document.body.removeEventListener('clicl',handleClickQutside);//если компонент уд-ся со стр то удаляю обработчик события с body на клик, т,е было размонтирование и вызови эту фу-ию
 }
   }, []);
 
