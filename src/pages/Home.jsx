@@ -27,9 +27,18 @@ const Home = () => {
     dispatch(setCategoryId(id)); //передала в диспатч  меняет категорию
   };
 
-  const onChangePage = (number) => {
-    dispatch(setCurrentPage(number));
+  const onChangePage = (page) => {
+    dispatch(setCurrentPage(page));
   };
+
+
+  //проверяю есть ли в url эти параметры 
+React.useEffect(()=>{
+  if(window.location.search){ //если есть то парсить и превращать в объект
+
+  }
+}, [])
+
 
   React.useEffect(() => {
     setIsLoading(true); //перед загрузкой
