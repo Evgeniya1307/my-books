@@ -1,21 +1,27 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, useNavigate } from "react-redux";
 import axios from "axios";
-import qs from 'qs'
+import qs from "qs";
 
-import { setCategoryId, setCurrentPage, setFilters } from "../redux/slices/filterSlice";
+import {
+  setCategoryId,
+  setCurrentPage,
+  setFilters,
+} from "../redux/slices/filterSlice";
 import Categories from "../components/Categories";
 import Sort, { sortList } from "../components/Sort";
 import BooksBlock from "../components/BooksBlock";
 import Skeleton from "../components/BooksBlock/Skeleton";
 import Pagination from "../Pagination";
 import { SearchContext } from "../App";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch(); //вернёт в dispatch функцию которая меняет стейт
   const { categoryId, sort, currentPage } = useSelector(
-    (state) => state.filter
-  ); //вытаскиваю всё хранилище и категории и сорт
+    (state) => state.filter); //вытаскиваю всё хранилище и категории и сорт
+  const isSearch = React.useRef(false);//поиска пока нет
 
   const { searchValue } = React.useContext(SearchContext); //создаю useContext  для вытаскивания данных как только изменения ппотом перерисовка
   //состояния для пицц
@@ -31,24 +37,7 @@ const Home = () => {
     dispatch(setCurrentPage(page));
   };
 
-
-  //проверяю есть ли в url эти параметры 
-React.useEffect(()=>{
-  if(window.location.search){ //если есть то парсить и превращать в объект
-const params =qs.parse(window.location.search.substring(1));//с помощью qs парсинг, substring(убираю ?)
-
-const sort = sortList.find(obj=> obj.sortProperty === sortProperty)//пробежалась по кажд,св-ву в объекте и найти что есть в парамс sortProperty
-
-dispatch(setFilters({
-  ...params,
-  sort,
- })
- )
-}
-}, [])
-
-
-  React.useEffect(() => {
+  const fetchBooks = () => {
     setIsLoading(true); //перед загрузкой
 
     const sortBy = sort.sortProperty.replace("-", ""); //из свойства удали -
@@ -65,13 +54,34 @@ dispatch(setFilters({
         setItems(res.data); //в data ответ от бэкенда хр-ся
         setIsLoading(false); //после загрузки скрываю
       });
+  };
+
+  //проверяю есть ли в url эти параметры
+  React.useEffect(() => {
+    if (window.location.search) {
+      //если есть то парсить и превращать в объект
+      const params = qs.parse(window.location.search.substring(1)); //с помощью qs парсинг, substring(убираю ?)
+      const sort = sortList.find(
+        (obj) => obj.sortProperty === params.sortProperty
+      ); //пробежалась по кажд,св-ву в объекте и найти что есть в парамс sortProperty
+      dispatch(
+        setFilters({
+          ...params,
+          sort,
+        })
+      );
+    }
+  }, []);
+
+  React.useEffect(() => {
     window.scrollTo(0, 0);
+    //делаю проверку при первом рендере нужно ли отправлять запрос, если пришли не отправлять ждать диспатча
   }, [categoryId, sort.sortProperty, searchValue, currentPage]); //если поменяется категория или сортировка делай запрос на бэкенд на получение новых книг
 
-//useEffect отвечающий за парсинг и вшивание параметров в адрес,строку
-React.useEffect(()=>{
-//если пришли параметры превращаю в целую строчку
-},[categoryId, sort.sortProperty, searchValue, currentPage])
+  //useEffect отвечающий за парсинг и вшивание параметров в адрес,строку
+  React.useEffect(() => {
+    //если пришли параметры превращаю в целую строчку
+  }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
   const books = items
     .filter((obj) => {

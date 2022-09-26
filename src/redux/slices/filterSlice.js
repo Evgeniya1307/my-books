@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 //делаю первое со-ие
 const initialState = {
+  searchValue: '',
   categoryId: 0,
   currentPage: 1, //пагинация
   sort: {
