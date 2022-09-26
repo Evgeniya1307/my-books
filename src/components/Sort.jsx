@@ -27,7 +27,7 @@ function Sort() {
 
   //при первом рендере по ссылке проверяю был ли клик
   React.useEffect(()=>{
-const handleClickQutside = (event)=> {
+const handleClickQutside = (event)=> {  // храню ссылку внутри этой переменной
   if(!event.path.includes(sortRef.current)){
     setOpen(false)
   }
