@@ -69,7 +69,7 @@ function BooksBlock({ id, title, price, imageUrl, types }) {
               />
             </svg>
             <span>Добавить</span>
-            <i>0</i>
+          {addedCount >0 && <i>0</i>}{/*если >0 рендери правую часть  */}
           </button>
         </div>
       </div>
