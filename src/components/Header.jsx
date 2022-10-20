@@ -2,7 +2,6 @@ import React from 'react';
 import Img from '../assets/img/Без названия.jpg';
 import {Link} from "react-router-dom"
 import Search from './Search';
-
 import {useSelector} from 'react-redux'
 
 function Header (){ 
@@ -27,8 +26,8 @@ function Header (){
       </Link>
       <Search />
       <div className="header__cart">
-        <Link to ="/cart" className ="button button--cart">
-          <span>{totalPrice}</span>
+      <Link to="/cart" className ="button button--cart">
+          <span>{totalPrice}$</span>
           <div className ="button__delimiter"></div>
           <svg
             width="18"

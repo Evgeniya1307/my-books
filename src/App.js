@@ -1,7 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router";
 
-
 import "./scss/app.scss";
 import Header from "./components/Header";
 import Home from "./pages/Home";
@@ -14,9 +13,6 @@ export const SearchContext = React.createContext();
 function App() {
   //стейт хранящий поле поска
   const [searchValue, setSearchValue] = React.useState(""); // инпут без ничего
-
-
-
   return (
     <div className="wrapper">
       <SearchContext.Provider value={{ searchValue, setSearchValue }}>
@@ -27,8 +23,8 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               {/*передаю значения */}
-              {/*будет рендерить по пути гавному Home */}
-              <Route patch="/cart" element={<Cart />} />
+              {/*будет рендерить по пути главному Home */}
+              <Route path="/cart" element={<Cart />} />
               <Route patch="*" element={<NotFound />} />
             </Routes>
           </div>
