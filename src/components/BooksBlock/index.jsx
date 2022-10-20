@@ -1,19 +1,22 @@
 import React from "react";
+import{useDispatch, useSelector} from "react-redux";
+
+
+
+
 
 function BooksBlock({ title, price, imageUrl, types }) {
-  // const [booksCount, setBookscCount] = React.useState(0);
-
-  // const onClickAdd = () => {
-  //   setBookscCount(booksCount + 1);
-  // };
-
- 
-//состояния для выбора какого типа
 const [activeType, setActiveType]= React.useState(0)
-
  //массив для рендеринга 
-const typeNames=['Рэйтинг ⭐⭐⭐⭐⭐', 'Скачиваний (100)'];
-  return (
+const typeNames=['Рэйтинг ⭐⭐⭐⭐⭐', 'Популярные (100)'];
+ 
+const onClickAdd=()=>{ //сгенерирую товар который добавлять 
+
+}
+
+
+
+return (
    <div className="pizza-block-wrapper">
     <div className="pizza-block">
       <img
@@ -56,3 +59,12 @@ const typeNames=['Рэйтинг ⭐⭐⭐⭐⭐', 'Скачиваний (100)']
 }
 
 export default BooksBlock;
+
+
+
+
+  // const [booksCount, setBookscCount] = React.useState(0);
+  // const onClickAdd = () => {
+  //   setBookscCount(booksCount + 1);
+  // };
+//состояния для выбора какого типа

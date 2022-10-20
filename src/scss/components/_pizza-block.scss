@@ -1,10 +1,15 @@
-@import '../variables';
+@import "../variables";
 
 .pizza-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 280px;
   text-align: center;
+  align-content: center;
   margin-bottom: 65px;
   transition: all 0.2s ease-in-out;
+  margin-top: auto; /*выровняла блоки*/
 
   &:hover {
     transform: scale(1.03);
@@ -16,7 +21,11 @@
   }
 
   &__image {
-    width: 260px;
+    display: flex;
+    justify-content: space-beetwen;
+align-items: center;
+    width: 280px;
+   
   }
 
   &__title {
