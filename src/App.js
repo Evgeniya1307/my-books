@@ -20,7 +20,6 @@ function App() {
   return (
     <div className="wrapper">
       <SearchContext.Provider value={{ searchValue, setSearchValue }}>
-        {" "}
         {/* есть контекст обернула приложение передала значение которое оно в себе хранит*/}
         <Header />
         <div className="content">

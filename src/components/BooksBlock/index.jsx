@@ -5,13 +5,15 @@ import{useDispatch, useSelector} from "react-redux";
 
 
 
-function BooksBlock({ title, price, imageUrl, types }) {
+function BooksBlock({id, title, price, imageUrl, types }) {
 const [activeType, setActiveType]= React.useState(0)
  //массив для рендеринга 
 const typeNames=['Рэйтинг ⭐⭐⭐⭐⭐', 'Популярные (100)'];
  
 const onClickAdd=()=>{ //сгенерирую товар который добавлять 
-
+const item = {//в корзине ожидаю
+id,
+};
 }
 
 
