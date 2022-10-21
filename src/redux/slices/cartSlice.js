@@ -37,8 +37,10 @@ minusItem(state,action){
     removeItem(state, action) { //удаление книг передаю id
         state.items= state.items.filter((obj) => obj.id !== action.payload);//найти объект у которого id не совпадает с action.payload я payload буду передавать id )
   },
+  //добавила очистку
   clearItems(state){
     state.items = [];
+    state.totalPrice=0;
   },
 }
 });
