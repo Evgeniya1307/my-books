@@ -1,10 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-
+import { useDispatch, useSelector } from "react-redux";
+import CartItem from '../components/CartItem';
 
 
 const Cart= () => {
+  const dispatch = useDispatch();//чтобы сделать очистку,добавление и удаления нужен dispatch
+  const items = useSelector((state) => state.cart.items); //вывести все книги
+  
+  
   return (
     <div className="container container--cart">
       <div className="cart">
@@ -37,7 +41,7 @@ const Cart= () => {
             </svg>
             Корзина
           </h2>
-          {/*<div onClick={onClickClear} className="cart__clear">*/}
+          <div onClick={onClickClear} className="cart__clear">
             <svg
               width="20"
               height="20"
@@ -74,14 +78,16 @@ const Cart= () => {
           </div>
         </div>
         <div className="content__items">
-        {/*  {items.map((item) => (
-        <CartItem key={item.id} {...item} />*/}
+
+          {items.map((item) => (
+        <CartItem key={item.id} {...item} />//взяла все items и прокинула
+          ))}
         </div>
         <div className="cart__bottom">
           <div className="cart__bottom-details">
             <span>
               {' '}
-              Всего пицц: <b>шт.</b>{' '}
+              Всего книг: <b>3 шт.</b>{' '}
             </span>
             <span>
               {' '}

@@ -6,6 +6,8 @@ import {useSelector} from 'react-redux'
 
 function Header (){ 
   const {items, totalPrice}= useSelector(state=>state.cart);//передала название фу-ию которую соз-ла в cartslice
+  const totalCount = items.reduce((sum, item)=>sum+item.count, 0); //взяла из всех объектов count и просуммировала
+  
   return( 
       <div className ="header">
     <div className ="container">

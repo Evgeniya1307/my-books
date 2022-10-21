@@ -28,23 +28,24 @@ body {
     margin: 100px auto;
     width: 500px;
     text-align: center;
-
     h2 {
       font-size: 32px;
       font-weight: 700;
       margin-bottom: 10px;
-    }
 
     p {
       font-size: 20px;
     }
   }
-
+  }
   &__title {
     font-weight: 800;
     font-size: 38px;
     margin-top: 60px;
     margin-bottom: 50px;
+    @media (max-width: 765px) {
+      text-align: center;
+    }
   }
 
   &__items {
@@ -53,23 +54,15 @@ body {
     grid-template-rows: repeat(1, 1fr);
     grid-column-gap: 11px;
 
+    &__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+
     @media (max-width: 1400px) {
       grid-template-columns: repeat(3, 1fr);
     }
-
-    @media (max-width: 1060px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media (max-width: 730px) {
-      grid-template-columns: repeat(1, 1fr);
-    }
-  }
-
-  &__top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 
     @media (max-width: 1260px) {
       flex-direction: column-reverse;
@@ -81,7 +74,6 @@ body {
           width: 785px;
         }
       }
-
       .sort {
         padding-left: 20px;
         b {
@@ -90,6 +82,14 @@ body {
       }
     }
 
+    @media (max-width: 1060px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 730px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
     @media (max-width: 760px) {
       .categories {
         ul {
@@ -114,6 +114,7 @@ body {
   margin: 0 auto;
 
   &--cart {
+    text-align: center;
     max-width: 820px;
     margin: 90px auto;
     .content__title {
@@ -128,7 +129,7 @@ body {
     justify-content: space-between;
     align-items: center;
   }
-
+/*корзина title*/
   .content__title {
     display: flex;
     align-items: center;
@@ -156,7 +157,7 @@ body {
     span {
       display: inline-block;
       margin-left: 7px;
-      color: #b6b6b6;
+      color: #6f6767;
       font-size: 18px;
     }
 
@@ -233,6 +234,23 @@ body {
           }
         }
 
+        b {
+          font-size: 22px;
+        }
+        &-price {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 33%;
+    
+          b {
+            font-weight: bold;
+            font-size: 22px;
+            letter-spacing: 0.01em;
+          }
+        }
+
+
         &:disabled {
           opacity: 0.4;
           border-color: #787878;
@@ -257,19 +275,6 @@ body {
 
       b {
         font-size: 22px;
-      }
-    }
-
-    &-price {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 33%;
-
-      b {
-        font-weight: bold;
-        font-size: 22px;
-        letter-spacing: 0.01em;
       }
     }
 

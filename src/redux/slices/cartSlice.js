@@ -26,7 +26,7 @@ findItem.count++;
 })
 }
 state.totalPrice=state.items.reduce((sum,obj)=>{
-     return obj.price+sum;
+     return (obj.price * obj.count)+sum ;//сколько стоит книга * сколько раз добавили + sum  к предыдущему
      }, 0)//когда передаю товар чтобы общая сумма
    },
 },
