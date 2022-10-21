@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import CartItem from "../components/CartItem";
 import { clearItems } from "../redux/slices/cartSlice";
+import CartEmpty from "../scss/CartEmpty";
 
 const Cart = () => {
   const dispatch = useDispatch(); //чтобы сделать очистку,добавление и удаления нужен dispatch
@@ -14,6 +15,11 @@ const onClickClear = () => {
       dispatch(clearItems());
     }
   };
+
+//условный рендер
+if(!totalPrice) { //проверка есть ли что в корзине если у нас 0 
+  return <CartEmpty/>
+}
 
 
   return (

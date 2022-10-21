@@ -40,7 +40,7 @@ minusItem(state,action){
   //добавила очистку
   clearItems(state){
     state.items = [];
-    state.totalPrice=0;
+    state.totalPrice=0;//очсистка где сумма заказа
   },
 }
 });
