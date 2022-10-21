@@ -60,7 +60,7 @@ function Header (){
               strokeLinejoin="round"
             />
           </svg>
-          <span>{items.length}</span>
+          <span>{totalCount}</span>
         </Link>
       </div>
     </div>
