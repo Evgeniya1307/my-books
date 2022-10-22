@@ -369,7 +369,7 @@ body {
       }
     }
   }
-
+//корзина пуста
   &--empty {
     margin: 80px auto;
     width: 620px;
@@ -394,6 +394,7 @@ body {
     }
 
     img {
+     border-radius: 15px;
       display: block;
       width: 300px;
       margin: 45px auto 60px;

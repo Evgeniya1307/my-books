@@ -21,7 +21,6 @@ if(!totalPrice) { //проверка есть ли что в корзине ес
   return <CartEmpty/>
 }
 
-
   return (
     <div className="container container--cart">
       <div className="cart">

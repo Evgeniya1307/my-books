@@ -5,11 +5,11 @@ import { addItem } from "../../redux/slices/cartSlice.js";
 //массив для рендеринга
 const typeNames = ["Рэйтинг ⭐⭐⭐⭐⭐", "Популярные (100)"];
 
-function BooksBlock({ id, title, price, imageUrl, types }) {
+function BooksBlock({ id, title, price, sizes, imageUrl, types }) {
   const dispatch = useDispatch();
   const cartItem = useSelector((state) => state.cart.items.find(obj => obj.id ===id)); //количество добавлений
-  const [activeType, setActiveType] = React.useState(0);
-
+  const [activeType, setActiveType] = React.useState('');
+  const [activeSize, setActiveSize] = React.useState('');
   //проверка если в корзине нашёлся такой товар то вытаскиваю count
   const addedCount = cartItem ? cartItem.count : 0;
  
@@ -22,7 +22,8 @@ function BooksBlock({ id, title, price, imageUrl, types }) {
       price,
       imageUrl,
       type: typeNames[activeType],
-      size: activeType,
+      sizes: sizes[activeSize],
+     
     };
     dispatch(addItem(item));
   };
@@ -48,6 +49,19 @@ function BooksBlock({ id, title, price, imageUrl, types }) {
               )
             )}
             {/*реакция при нажатии  на рэйтинг скачиваний */}
+          </ul>
+          <ul>
+            {sizes.map((size, i) => (
+              <li
+                key={size}
+                onClick={() => {
+                  setActiveSize(i);
+                }}
+                className={activeSize === i ? "active" : ""}
+              >
+                {size}
+              </li>
+            ))}
           </ul>
         </div>
         <div className="pizza-block__bottom">

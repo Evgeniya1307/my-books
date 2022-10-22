@@ -1,5 +1,5 @@
 import React from 'react'
-import cartEmptyImg from "../assets/img/empty.jpg"
+import cartEmptyImg from "../assets/img/cestas-plastico-compra-cestas-vacias-supermercado-rosa-azul-viernes-negro-concepto-venta_99272-4570.webp"
 import { Link } from 'react-router-dom';
 const CartEmpty = () => {
     return (
