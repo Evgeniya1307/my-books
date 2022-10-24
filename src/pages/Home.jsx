@@ -48,32 +48,18 @@ const Home = () => {
     const category = categoryId > 0 ? `category = ${categoryId}` : "";
     const search = searchValue ? `&search=${searchValue}` : ""; //для поиска по бэкенду
 
-  //   axios
-  //     .get(
-  //       `https://62f392d2a84d8c968126cc02.mockapi.io/items?page=${currentPage}&1&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
-  //     )
-  //     .then((res) => {
-  //       //promise ук-аю что вытащить ответ от сервера
-  //       setItems(res.data); //в data ответ от бэкенда хр-ся
-  //       setIsLoading(false); //после загрузки скрываю
-  //       console.log(66666);
-  //     })
-  //     .catch((err) => {//если не успешно
-  //       setIsLoading(false)//загрузку надо завершить даже если не успешно
-  //     });
-  //   window.scrollTo(0, 0); //Прокрутка документа
-  // };
-
-  const res = await axios.get(
-    `https://62f392d2a84d8c968126cc02.mockapi.io/items?page=${currentPage}&1&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
-    );
-  setItems(res.data);//в data ответ от бэкенда хр-ся
-  setIsLoading(false);//после загрузки скрываю
-  console.log(66666)
-
   try{//успешный ответ
-
-  } catch(){//что то пошло нетак
+    const res = await axios.get(
+      `https://62f392d2a84d8c968126cc02.mockapi.io/items?page=${currentPage}&1&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
+      );
+    setItems(res.data);//в data ответ от бэкенда хр-ся
+    setIsLoading(false);//после загрузки скрываю
+    console.log(66666) 
+  } catch(error){//что то пошло нетак
+    setIsLoading(false);//загрузку надо завершить даже если не успешно
+    console.log('ERROR', error);
+    alert('Ошибка получения книг');
+  }finally{// выполнится независимо ошибка или успех
 
   }
   window.scrollTo(0,0);//Прокрутка документа
