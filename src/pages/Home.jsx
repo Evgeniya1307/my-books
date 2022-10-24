@@ -29,20 +29,18 @@ const Home = () => {
   ); //вытаскиваю всё хранилище и категории и сорт
 
   
-const { searchValue } = React.useContext(SearchContext); //создаю useContext  для вытаскивания данных как только изменения ппотом перерисовка
-  //будет понятно что отобразить скелетон при загрузке или пиццу
-  const [isLoading, setIsLoading] = React.useState(true); // при первом рендере true
-
-  const onChangeCategory = React.useCallback((id) => {
+const { searchValue } = React.useContext(SearchContext); //создаю useContext  для вытаскивания данных как только изменения потом перерисовка
+ 
+const onChangeCategory =(id) => {
     dispatch(setCategoryId(id)); //передала в диспатч  меняет категорию
-  }, []);
+  }
 
-  const onChangePage = (page) => {
-    dispatch(setCurrentPage(page));
+  const onChangePage = (number) => {
+    dispatch(setCurrentPage(number));
   };
 
   const getBooks = async () => {
-    setIsLoading(true); //перед загрузкой
+    
 
     const sortBy = sort.sortProperty.replace("-", ""); //из свойства удали -
     const order = sort.sortProperty.includes("-") ? "asc" : "desc"; // проверяй если в сортировке - если includes есть - то делать asc возрастанию иначе desc по убыванию
@@ -98,15 +96,10 @@ const { searchValue } = React.useContext(SearchContext); //создаю useConte
     }
   }, []);
 
-  // Если был первый рендер, то запрашиваем пиццы
+  // Если был первый рендер, то запрашиваем книги
   React.useEffect(() => {
-    window.scrollTo(0, 0);
-    if (!isSearch.current) {
-      //делаю проверку при первом рендере нужно ли отправлять запрос, если пришли параметры не отправлять ждать dispatch
       getBooks(); // если нет параметров то делаю запрос
-    }
-    isSearch.current = false;
-  }, [categoryId, sort.sortProperty, searchValue, currentPage]); //если поменяется категория или сортировка делай запрос на бэкенд на получение новых книг
+    }, [categoryId, sort.sortProperty, searchValue, currentPage]); //если поменяется категория или сортировка делай запрос на бэкенд на получение новых книг
 
   const books = items.map((obj) => <BooksBlock key={obj.id} {...obj} />);
   const skeletons = [...new Array(6)].map((_, index) => (
@@ -144,7 +137,8 @@ export default Home;
 //});
 //состояния для пицц
  // const [items, setItems] = React.useState([]); // изначально пустой массив
-
+//будет понятно что отобразить скелетон при загрузке или пиццу
+  //const [isLoading, setIsLoading] = React.useState(true); // при первом рендере true
 
 //promise синхронный превращает в асинхронный чтобы в определённое время выполнить
 //а async await превращает асинхронный в синхронный
