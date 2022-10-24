@@ -1,13 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
-const fetchUserById = createAsyncThunk(//позволит делать асинхронный экшен
-  'users/fetchUserById',
-  async(userId:Number, thunkAPI)=>{
-    const response = await userAPI.fetchById(userId)
-    return response.data
+export const fetchBooks = createAsyncThunk( //позволит делать асинхронный экшен
+  "books/fetchBooksStatus",
+  async (params) => {
+    const { sortBy, order, category, currentPage, search } = params;
+    const { data } = await axios.get( //сделала запрос
+      `https://62f392d2a84d8c968126cc02.mockapi.io/items?page=${currentPage}&1&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
+    );
+    return data;//верни ответ
   }
-)
-
+);
 
 const initialState = {
   items: [],
@@ -21,8 +24,13 @@ const booksSlice = createSlice({
       state.items = action.payload;
     },
   },
+  extraReducers:{//логика асинхронных экшинов
+[fetchBooks.fulfilled]:(state, action)=>{
+  console.log(state);
+},
+  },
 });
 
-export const { setItems } = booksSlice.actions;//вытаскиваю
+export const { setItems } = booksSlice.actions; //вытаскиваю
 
 export default booksSlice.reducer;

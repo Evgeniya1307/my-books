@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
+
 import qs from "qs";
 
 import {
@@ -15,7 +15,7 @@ import Skeleton from "../components/BooksBlock/Skeleton";
 import Pagination from "../Pagination";
 import { SearchContext } from "../App";
 import { useNavigate } from "react-router-dom";
-import { setItems } from "../redux/slices/booksSlice"; 
+import { fetchBooks } from "../redux/slices/booksSlice"; 
 
 const Home = () => {
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ const { searchValue } = React.useContext(SearchContext); //создаю useConte
     dispatch(setCurrentPage(page));
   };
 
-  const fetchBooks = async () => {
+  const getBooks = async () => {
     setIsLoading(true); //перед загрузкой
 
     const sortBy = sort.sortProperty.replace("-", ""); //из свойства удали -
@@ -50,10 +50,13 @@ const { searchValue } = React.useContext(SearchContext); //создаю useConte
     const search = searchValue ? `&search=${searchValue}` : ""; //для поиска по бэкенду
 
   try{//успешный ответ
-    const {data} = await axios.get(
-      `https://62f392d2a84d8c968126cc02.mockapi.io/items?page=${currentPage}&1&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
-      );
-   dispatch(setItems(data));//в data ответ от бэкенда хр-ся
+   dispatch(fetchBooks({
+    sortBy,
+    order,
+    category,
+    search,
+    currentPage
+   }));
   } catch(error){//что то пошло нетак
     console.log('ERROR', error);
     alert('Ошибка получения книг');
@@ -75,7 +78,7 @@ const { searchValue } = React.useContext(SearchContext); //создаю useConte
       navigate(`?${queryString}`);
     }
     isMounted.current = true;
-  }, [categoryId, sort.sortProperty, currentPage]);
+  }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
   // Если был первый рендер, то проверяем URl-параметры и сохраняем в редуксе
   React.useEffect(() => {
@@ -100,7 +103,7 @@ const { searchValue } = React.useContext(SearchContext); //создаю useConte
     window.scrollTo(0, 0);
     if (!isSearch.current) {
       //делаю проверку при первом рендере нужно ли отправлять запрос, если пришли параметры не отправлять ждать dispatch
-      fetchBooks(); // если нет параметров то делаю запрос
+      getBooks(); // если нет параметров то делаю запрос
     }
     isSearch.current = false;
   }, [categoryId, sort.sortProperty, searchValue, currentPage]); //если поменяется категория или сортировка делай запрос на бэкенд на получение новых книг
