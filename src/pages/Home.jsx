@@ -19,12 +19,13 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch(); //вернёт в dispatch функцию которая меняет стейт
-  const isSearch = React.useRef(false);//поиска пока нет
+  const isSearch = React.useRef(false); //поиска пока нет
   const isMounted = React.useRef(false);
-  
+
   const { categoryId, sort, currentPage } = useSelector(
-    (state) => state.filter); //вытаскиваю всё хранилище и категории и сорт
-  
+    (state) => state.filter
+  ); //вытаскиваю всё хранилище и категории и сорт
+
   const { searchValue } = React.useContext(SearchContext); //создаю useContext  для вытаскивания данных как только изменения ппотом перерисовка
   //состояния для пицц
   const [items, setItems] = React.useState([]); // изначально пустой массив
@@ -39,7 +40,7 @@ const Home = () => {
     dispatch(setCurrentPage(page));
   };
 
-  const fetchBooks = () => {
+  const fetchBooks = async () => {
     setIsLoading(true); //перед загрузкой
 
     const sortBy = sort.sortProperty.replace("-", ""); //из свойства удали -
@@ -47,21 +48,41 @@ const Home = () => {
     const category = categoryId > 0 ? `category = ${categoryId}` : "";
     const search = searchValue ? `&search=${searchValue}` : ""; //для поиска по бэкенду
 
-    axios
-      .get(
-        `https://62f392d2a84d8c968126cc02.mockapi.io/items?page=${currentPage}&1&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
-      )
-      .then((res) => {
-        //ук-аю что вытащить ответ от сервера
-        setItems(res.data); //в data ответ от бэкенда хр-ся
-        setIsLoading(false); //после загрузки скрываю
-      });
-      window.scrollTo(0,0);//Прокрутка документа
-  };
+  //   axios
+  //     .get(
+  //       `https://62f392d2a84d8c968126cc02.mockapi.io/items?page=${currentPage}&1&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
+  //     )
+  //     .then((res) => {
+  //       //promise ук-аю что вытащить ответ от сервера
+  //       setItems(res.data); //в data ответ от бэкенда хр-ся
+  //       setIsLoading(false); //после загрузки скрываю
+  //       console.log(66666);
+  //     })
+  //     .catch((err) => {//если не успешно
+  //       setIsLoading(false)//загрузку надо завершить даже если не успешно
+  //     });
+  //   window.scrollTo(0, 0); //Прокрутка документа
+  // };
+
+  const res = await axios.get(
+    `https://62f392d2a84d8c968126cc02.mockapi.io/items?page=${currentPage}&1&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
+    );
+  setItems(res.data);//в data ответ от бэкенда хр-ся
+  setIsLoading(false);//после загрузки скрываю
+  console.log(66666)
+
+  try{//успешный ответ
+
+  } catch(){//что то пошло нетак
+
+  }
+  window.scrollTo(0,0);//Прокрутка документа
+    };
 
   // Если изменили параметры и был первый рендер
   React.useEffect(() => {
-    if (isMounted.current) { // если true(был первый рендер) то делать нижнюю инфу
+    if (isMounted.current) {
+      // если true(был первый рендер) то делать нижнюю инфу
       const queryString = qs.stringify({
         sortProperty: sort.sortProperty,
         categoryId,
@@ -71,8 +92,8 @@ const Home = () => {
     }
     isMounted.current = true;
   }, [categoryId, sort.sortProperty, currentPage]);
-  
-// Если был первый рендер, то проверяем URl-параметры и сохраняем в редуксе
+
+  // Если был первый рендер, то проверяем URl-параметры и сохраняем в редуксе
   React.useEffect(() => {
     if (window.location.search) {
       //если есть то парсить и превращать в объект
@@ -84,7 +105,7 @@ const Home = () => {
         setFilters({
           ...params,
           sort,
-        }),
+        })
       );
       isSearch.current = true;
     }
@@ -93,15 +114,17 @@ const Home = () => {
   // Если был первый рендер, то запрашиваем пиццы
   React.useEffect(() => {
     window.scrollTo(0, 0);
-    if(!isSearch.current){  //делаю проверку при первом рендере нужно ли отправлять запрос, если пришли параметры не отправлять ждать dispatch
-     fetchBooks();// если нет параметров то делаю запрос 
+    if (!isSearch.current) {
+      //делаю проверку при первом рендере нужно ли отправлять запрос, если пришли параметры не отправлять ждать dispatch
+      fetchBooks(); // если нет параметров то делаю запрос
     }
     isSearch.current = false;
   }, [categoryId, sort.sortProperty, searchValue, currentPage]); //если поменяется категория или сортировка делай запрос на бэкенд на получение новых книг
 
-
   const books = items.map((obj) => <BooksBlock key={obj.id} {...obj} />);
-  const skeletons = [...new Array(6)].map((_, index) =>  <Skeleton key={index} />);
+  const skeletons = [...new Array(6)].map((_, index) => (
+    <Skeleton key={index} />
+  ));
 
   return (
     <div className="container">
@@ -132,3 +155,6 @@ export default Home;
 // name: "популярности", //соз-ла объект при первом открытии приложения выберется популярные
 // sortProperty: "rating", // по умолчанию сортировка по рейтингу
 //});
+
+//promise синхронный превращает в асинхронный чтобы в определённое время выполнить
+//а async await превращает асинхронный в синхронный
