@@ -15,20 +15,21 @@ import Skeleton from "../components/BooksBlock/Skeleton";
 import Pagination from "../Pagination";
 import { SearchContext } from "../App";
 import { useNavigate } from "react-router-dom";
+import { setItems } from "../redux/slices/booksSlice"; 
 
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch(); //вернёт в dispatch функцию которая меняет стейт
   const isSearch = React.useRef(false); //поиска пока нет
   const isMounted = React.useRef(false);
-
+  
+  const items = useSelector((state)=> state.books.items)
   const { categoryId, sort, currentPage } = useSelector(
     (state) => state.filter
   ); //вытаскиваю всё хранилище и категории и сорт
 
-  const { searchValue } = React.useContext(SearchContext); //создаю useContext  для вытаскивания данных как только изменения ппотом перерисовка
-  //состояния для пицц
-  const [items, setItems] = React.useState([]); // изначально пустой массив
+  
+const { searchValue } = React.useContext(SearchContext); //создаю useContext  для вытаскивания данных как только изменения ппотом перерисовка
   //будет понятно что отобразить скелетон при загрузке или пиццу
   const [isLoading, setIsLoading] = React.useState(true); // при первом рендере true
 
@@ -49,18 +50,15 @@ const Home = () => {
     const search = searchValue ? `&search=${searchValue}` : ""; //для поиска по бэкенду
 
   try{//успешный ответ
-    const res = await axios.get(
+    const {data} = await axios.get(
       `https://62f392d2a84d8c968126cc02.mockapi.io/items?page=${currentPage}&1&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
       );
-    setItems(res.data);//в data ответ от бэкенда хр-ся
-    setIsLoading(false);//после загрузки скрываю
-    console.log(66666) 
+   dispatch(setItems(data));//в data ответ от бэкенда хр-ся
   } catch(error){//что то пошло нетак
-    setIsLoading(false);//загрузку надо завершить даже если не успешно
     console.log('ERROR', error);
     alert('Ошибка получения книг');
   }finally{// выполнится независимо ошибка или успех
-
+    setIsLoading(false);//загрузку надо завершить даже если не успешно
   }
   window.scrollTo(0,0);//Прокрутка документа
     };
@@ -141,6 +139,9 @@ export default Home;
 // name: "популярности", //соз-ла объект при первом открытии приложения выберется популярные
 // sortProperty: "rating", // по умолчанию сортировка по рейтингу
 //});
+//состояния для пицц
+ // const [items, setItems] = React.useState([]); // изначально пустой массив
+
 
 //promise синхронный превращает в асинхронный чтобы в определённое время выполнить
 //а async await превращает асинхронный в синхронный
