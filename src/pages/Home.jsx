@@ -15,54 +15,42 @@ import Skeleton from "../components/BooksBlock/Skeleton";
 import Pagination from "../Pagination";
 import { SearchContext } from "../App";
 import { useNavigate } from "react-router-dom";
-import { fetchBooks } from "../redux/slices/booksSlice"; 
+import { fetchBooks } from "../redux/slices/booksSlice";
 
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch(); //вернёт в dispatch функцию которая меняет стейт
-  const isSearch = React.useRef(false); //поиска пока нет
   const isMounted = React.useRef(false);
-  
-  const items = useSelector((state)=> state.books.items)
+
+  const { items, status } = useSelector((state) => state.books);//вытаскиваю данные
   const { categoryId, sort, currentPage } = useSelector(
     (state) => state.filter
   ); //вытаскиваю всё хранилище и категории и сорт
 
-  
-const { searchValue } = React.useContext(SearchContext); //создаю useContext  для вытаскивания данных как только изменения потом перерисовка
- 
-const onChangeCategory =(id) => {
-    dispatch(setCategoryId(id)); //передала в диспатч  меняет категорию
-  }
+  const { searchValue } = React.useContext(SearchContext); //создаю useContext  для вытаскивания данных как только изменения потом перерисовка
 
+  const onChangeCategory = (id) => {
+    dispatch(setCategoryId(id)); //передала в диспатч  меняет категорию
+  };
   const onChangePage = (number) => {
     dispatch(setCurrentPage(number));
   };
-
   const getBooks = async () => {
-    
-
     const sortBy = sort.sortProperty.replace("-", ""); //из свойства удали -
     const order = sort.sortProperty.includes("-") ? "asc" : "desc"; // проверяй если в сортировке - если includes есть - то делать asc возрастанию иначе desc по убыванию
     const category = categoryId > 0 ? `category = ${categoryId}` : "";
     const search = searchValue ? `&search=${searchValue}` : ""; //для поиска по бэкенду
-
-  try{//успешный ответ
-   dispatch(fetchBooks({
-    sortBy,
-    order,
-    category,
-    search,
-    currentPage
-   }));
-  } catch(error){//что то пошло нетак
-    console.log('ERROR', error);
-    alert('Ошибка получения книг');
-  }finally{// выполнится независимо ошибка или успех
-    setIsLoading(false);//загрузку надо завершить даже если не успешно
-  }
-  window.scrollTo(0,0);//Прокрутка документа
-    };
+    dispatch(
+      fetchBooks({
+        sortBy,
+        order,
+        category,
+        search,
+        currentPage,
+      })
+    );
+    window.scrollTo(0, 0); //Прокрутка документа
+  };
 
   // Если изменили параметры и был первый рендер
   React.useEffect(() => {
@@ -73,7 +61,7 @@ const onChangeCategory =(id) => {
         categoryId,
         currentPage,
       });
-      navigate(`?${queryString}`);
+      navigate(`/?${queryString}`);
     }
     isMounted.current = true;
   }, [categoryId, sort.sortProperty, searchValue, currentPage]);
@@ -92,14 +80,13 @@ const onChangeCategory =(id) => {
           sort,
         })
       );
-      isSearch.current = true;
     }
   }, []);
 
   // Если был первый рендер, то запрашиваем книги
   React.useEffect(() => {
-      getBooks(); // если нет параметров то делаю запрос
-    }, [categoryId, sort.sortProperty, searchValue, currentPage]); //если поменяется категория или сортировка делай запрос на бэкенд на получение новых книг
+    getBooks(); // если нет параметров то делаю запрос
+  }, [categoryId, sort.sortProperty, searchValue, currentPage]); //если поменяется категория или сортировка делай запрос на бэкенд на получение новых книг
 
   const books = items.map((obj) => <BooksBlock key={obj.id} {...obj} />);
   const skeletons = [...new Array(6)].map((_, index) => (
@@ -115,11 +102,17 @@ const onChangeCategory =(id) => {
         <Sort />
       </div>
       <h2 className="content__title">Все книги</h2>
-      <div className="content__items">
-        {isLoading ? skeletons : books}
-        {/*если идёт загрузка создай массив из (6) и замени их .map на скелетон иначе если загрузка не идёт то рендери items.map((obj) =><BooksBlock key ={obj.id} {...obj} возьми объект и его отрендери */}
-        {/*если тру покажи скелетон спред сократил скопировал весь obj если пропсы с точно таким названием */}
-      </div>
+      {status === "error" ? (
+        <div className="content__error-info">
+          <h2> Произошла ошибка 😕</h2>
+          <p>К сожалению, Не удалось получить книги...</p>
+        </div>
+      ) : (
+        <div className="content__items">
+          {status === "loading" ? skeletons : books}
+        </div>
+      )}
+
       <Pagination currentPage={currentPage} onChangePage={onChangePage} />
       {/*метод возращающий число */}
     </div>
@@ -136,9 +129,9 @@ export default Home;
 // sortProperty: "rating", // по умолчанию сортировка по рейтингу
 //});
 //состояния для пицц
- // const [items, setItems] = React.useState([]); // изначально пустой массив
+// const [items, setItems] = React.useState([]); // изначально пустой массив
 //будет понятно что отобразить скелетон при загрузке или пиццу
-  //const [isLoading, setIsLoading] = React.useState(true); // при первом рендере true
+//const [isLoading, setIsLoading] = React.useState(true); // при первом рендере true
 
 //promise синхронный превращает в асинхронный чтобы в определённое время выполнить
 //а async await превращает асинхронный в синхронный

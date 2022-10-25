@@ -5,18 +5,19 @@ import axios from "axios";
 export const fetchBooks = createAsyncThunk(
   //позволит делать асинхронный экшен
   "books/fetchBooksStatus",
-  async (params) => {
+  async (params, thunkApi) => {
     const { sortBy, order, category, currentPage, search } = params;
     const { data } = await axios.get(
       //сделала запрос
       `https://62f392d2a84d8c968126cc02.mockapi.io/items?page=${currentPage}&1&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
     );
     return data; //верни ответ
-  });
+  }
+);
 
 const initialState = {
   items: [],
-status:'loading',//loading | success|error
+  status: "loading", //loading | success|error
 };
 
 const booksSlice = createSlice({
@@ -29,14 +30,17 @@ const booksSlice = createSlice({
   },
   extraReducers: {
     //логика асинхронных экшинов
-    [fetchBooks.pending]: (state, action) => {
-      console.log("Идёт отправка");
+    [fetchBooks.pending]: (state) => {
+      state.status = "loading"; //Идёт отправка
+      state.items = []; //перед отправкой очищаю старые книги
     },
     [fetchBooks.fulfilled]: (state, action) => {
-      console.log(state,"Всё ОК");
+      state.items = action.payload;
+      state.status = "success"; //Всё ОК
     },
-    [fetchBooks.rejected]: (state, action) => {
-      console.log("Будет ошибка");
+    [fetchBooks.rejected]: (state) => {
+      state.status = "error"; //Будет ошибка
+      state.items = [];
     },
   },
 });
