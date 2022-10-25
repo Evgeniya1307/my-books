@@ -14,7 +14,6 @@ import Sort, { sortList } from "../components/Sort";
 import BooksBlock from "../components/BooksBlock";
 import Skeleton from "../components/BooksBlock/Skeleton";
 import Pagination from "../Pagination";
-import { SearchContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import { fetchBooks, selectorBooksData } from "../redux/slices/booksSlice";
 
