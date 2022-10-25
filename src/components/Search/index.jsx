@@ -1,18 +1,19 @@
 import React from "react";
 import debounce from "lodash.debounce";
+import { useDispatch } from "react-redux";
 
-
-import { SearchContext } from "../../App";
 import styles from "./Search.module.scss";
+import { setSearchValue } from "../../redux/slices/filterSlice";
+
 
 const Search = () => {
-  const [value, setValue] = React.useState("");//за быстрое отображение из инпута данных
-  const {setSearchValue } = React.useContext(SearchContext); //SearchContext из этой переменной с помощью хука useContext вытаскиваю содержимое этой переменной которая хр-ся в велью
+  const dispatch = useDispatch();
+  const [value, setValue] = React.useState("");//за быстрое отображение из инпута данных (создавала для debounce)
   const inputRef = React.useRef(); // reactjs возьми свою логику сохрани в переменной inputRef
 
   //focus в инпуте
   const onClickClear = () => {
-setSearchValue(''); //чтобы делать поиск стейт в app
+dispatch(setSearchValue('')); //чтобы делать поиск стейт в app
     setValue('')// для фокуса возвращения
 inputRef.current.focus();
   };
@@ -21,9 +22,9 @@ inputRef.current.focus();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const updateSearchValue = React.useCallback(
     debounce((str) => {
-      setSearchValue(str);//обновить из контекста то что есть в App
-    }, 250),
-    []
+      dispatch(setSearchValue(str));//обновить то что есть в app
+    }, 150),
+    [],
   );
 
   const onChangeInput = (event) => {

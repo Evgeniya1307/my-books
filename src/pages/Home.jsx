@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import qs from "qs";
 
 import {
+  selectFilter,
   setCategoryId,
   setCurrentPage,
   setFilters,
@@ -15,19 +16,15 @@ import Skeleton from "../components/BooksBlock/Skeleton";
 import Pagination from "../Pagination";
 import { SearchContext } from "../App";
 import { useNavigate } from "react-router-dom";
-import { fetchBooks } from "../redux/slices/booksSlice";
+import { fetchBooks, selectorBooksData } from "../redux/slices/booksSlice";
 
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch(); //вернёт в dispatch функцию которая меняет стейт
   const isMounted = React.useRef(false);
 
-  const { items, status } = useSelector((state) => state.books);//вытаскиваю данные
-  const { categoryId, sort, currentPage } = useSelector(
-    (state) => state.filter
-  ); //вытаскиваю всё хранилище и категории и сорт
-
-  const { searchValue } = React.useContext(SearchContext); //создаю useContext  для вытаскивания данных как только изменения потом перерисовка
+  const { items, status } = useSelector(selectorBooksData);//вытаскиваю данные
+  const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilter); //вытаскиваю всё хранилище и категории и сорт
 
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id)); //передала в диспатч  меняет категорию

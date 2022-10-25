@@ -1,13 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem } from "../../redux/slices/cartSlice.js";
+import { addItem, selectCartItemById } from "../../redux/slices/cartSlice.js";
 
 //массив для рендеринга
 const typeNames = ["Рэйтинг ⭐⭐⭐⭐⭐", "Популярные (100)"];
 
 function BooksBlock({ id, title, price, sizes, imageUrl, types }) {
   const dispatch = useDispatch();
-  const cartItem = useSelector((state) => state.cart.items.find(obj => obj.id ===id)); //количество добавлений
+  const cartItem = useSelector(selectCartItemById(id)); //количество добавлений
   const [activeType, setActiveType] = React.useState('');
   const [activeSize, setActiveSize] = React.useState('');
   //проверка если в корзине нашёлся такой товар то вытаскиваю count

@@ -47,7 +47,8 @@ minusItem(state,action){
 
 
 //создаю селекторы
-const selectCart = (state)=> state.cart;
+export const selectCart = (state)=> state.cart;
+export const selectCartItemById = (id)=> (state) => state.cart.items.find((obj)=> obj.id ===id);//selectCartItemById получит параметр и вернёт другую функцию
 
 export const {addItem, removeItem, minusItem, clearItems }= cartSlice.actions;
 export default cartSlice.reducer;

@@ -45,6 +45,9 @@ const booksSlice = createSlice({
   },
 });
 
+//селекторы
+export const selectorBooksData =  (state) => state.books;
+
 export const { setItems } = booksSlice.actions; //вытаскиваю
 
 export default booksSlice.reducer;

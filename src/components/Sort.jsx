@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import {setSort} from "../redux/slices/filterSlice";
+import {selectSort, setSort} from "../redux/slices/filterSlice";
 
 //массив для списка
 export const sortList = [
@@ -15,7 +15,7 @@ export const sortList = [
 
 function Sort() {
   const dispatch = useDispatch();
-  const sort = useSelector((state) => state.filter.sort); //вытаскиваю из редакса  объект св-ва сорт
+  const sort = useSelector(selectSort); //вытаскиваю из редакса  объект св-ва сорт
   const sortRef = React.useRef();//ссылка на дом элемент при скрытии сортировки
   const [open, setOpen] = React.useState(false); // блок скрыт это будет как со светом включен выключен
   
