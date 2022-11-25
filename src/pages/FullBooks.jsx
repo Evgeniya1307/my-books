@@ -5,9 +5,9 @@ import axios from "axios";
 //инфа пиццы
 const FullBooks = () => {
   const { books, setBooks } = React.useState();
-  const { id } = useParams(); //возвращает объект пар ключ/значение динамических параметров из текущего URL-адреса, которые были сопоставлены <Route path>
+  const { id } = useParams();; //возвращает объект пар ключ/значение динамических параметров из текущего URL-адреса, которые были сопоставлены <Route path>
 
-  //запрос по id книг
+  //запрос по id
   React.useEffect(() => {
     async function fetchBooks() {
       try {
@@ -16,20 +16,17 @@ const FullBooks = () => {
         );
         setBooks(data);
       } catch (error) {
-        alert("Ошибка при получении книг");
+        alert('"Ошибка при получении книг"');
       }
     }
+    fetchBooks();
   }, []);
 
   return (
     <div className="container">
-      <img src="" />
+      <img src= '' alt="id" />
       <h2>{id}</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-        pellentesque tincidunt interdum.
-      </p>
-      <h4>250 $</h4>
+      <h4></h4>
     </div>
   );
 };

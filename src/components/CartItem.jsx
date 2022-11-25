@@ -26,7 +26,7 @@ const CartItem = ({ id, title, price, imageUrl, types, sizes, count }) => {
   return (
       <div className="cart__item">
         <div className="cart__item-img">
-          <img className="pizza-block__image" src={imageUrl} alt="book" />
+          <img className="pizza-block__image" src={imageUrl} alt="books" />
         </div>
         <div className="cart__item-info">
           <h3>{title}</h3>
