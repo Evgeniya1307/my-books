@@ -7,7 +7,7 @@ const FullBooks = () => {
   const { books, setBooks } = React.useState();
   const { id } = useParams();; //возвращает объект пар ключ/значение динамических параметров из текущего URL-адреса, которые были сопоставлены <Route path>
 
-  //запрос по id
+  //запрос по id делаю
   React.useEffect(() => {
     async function fetchBooks() {
       try {
