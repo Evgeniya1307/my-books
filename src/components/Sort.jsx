@@ -37,7 +37,7 @@ return()=>document.body.removeEventListener('clicl',handleClickQutside);//есл
   }, []);
 
   return (
-    <div ref={sortRef} className="sort">
+    <div ref={sortRef} className="sort">{/*ссылка на дом элемент */}
       <div className="sort__label">
         {/*сортировка по */}
       <svg
