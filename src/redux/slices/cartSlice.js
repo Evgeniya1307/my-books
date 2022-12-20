@@ -12,7 +12,7 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {   
 addItem(state, action){
-  const findItem = state.items.find((obj) => obj.id === action.payload.id);//если нашёлся объект id у которого найден экшен payload
+  const findItem = state.items.find((obj) => obj.id === action.payload.id);//если нашёлся объект id у которого найден экшен payload то сделай ++
 
   if(findItem){
 findItem.count++;
@@ -34,7 +34,7 @@ minusItem(state,action){
     findItem.count--;
   }
 },
-    removeItem(state, action) { //удаление книг передаю id
+    removeItem(state, action) { // наудаление книг передаю id
         state.items= state.items.filter((obj) => obj.id !== action.payload);//найти объект у которого id не совпадает с action.payload я payload буду передавать id )
   },
   //добавила очистку
