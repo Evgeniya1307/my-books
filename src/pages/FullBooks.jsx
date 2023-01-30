@@ -5,7 +5,7 @@ import axios from "axios";
 //инфа пиццы
 const FullBooks = () => {
   const { books, setBooks } = React.useState();
-  const { id } = useParams();; //возвращает объект пар ключ/значение динамических параметров из текущего URL-адреса, которые были сопоставлены <Route path>
+  const { id } = useParams();; //returns an object of parameter key/value pairs from the existing URLs that were found by <pathpath>
 
   //запрос по id делаю
   React.useEffect(() => {
